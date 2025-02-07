@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
         remainingTime = 60;    
     }
 
+    // Quick timer that starts at 60 and subtracts until hits 0
     void Update()
     {
         remainingTime -= Time.deltaTime;

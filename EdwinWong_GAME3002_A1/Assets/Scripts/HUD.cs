@@ -34,6 +34,7 @@ public class HUD : MonoBehaviour
     {
         SliderBar(ballLaunchScript.launchSpeed, ballLaunchScript.launchSpeedMax);
 
+        // Updating HUD text fields
         if (ballLaunchScript.isAtStart == false)
         {
             textLaunchSpeed.text = "Launch Speed: " + ballLaunchScript.launchSpeed;
@@ -46,6 +47,7 @@ public class HUD : MonoBehaviour
         textTimeLeft.text = "Time Left: " + timerScript.remainingTime.ToString("F0") + " sec";
         textScoreCounter.text = "Score: " + ballLaunchScript.score;
 
+        // End the game
         if (timerScript.remainingTime <= 0)
         {
             Time.timeScale = 0;
@@ -53,6 +55,7 @@ public class HUD : MonoBehaviour
         }
     }
 
+    // Power slider input
     void SliderBar(float min, float max)
     {
         sliderLaunchSpeed.value = min / max;

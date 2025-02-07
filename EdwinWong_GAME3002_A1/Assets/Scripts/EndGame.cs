@@ -27,10 +27,12 @@ public class EndGame : MonoBehaviour
 
     private void Update()
     {
+        // Updates current score
         currentScore = ballLaunchScript.score;
 
         currentScoreText.text = "Current Score: " + currentScore.ToString();
 
+        // If current score higher than high score, update high score
         if (currentScore >= highScore)
         {
             highScore = currentScore;

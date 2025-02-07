@@ -109,11 +109,13 @@ public class BallLaunch : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Calculate the amount of time in air
         if (startTime)
         {
             airTime += Time.deltaTime;
         }
 
+        // Oscillates the horizontal angle and sets launchAngleX
         if (horizontalAngle)
         {
             Oscillate(-45, 45);
@@ -121,6 +123,7 @@ public class BallLaunch : MonoBehaviour
             launchAngleX = oscillateNumber;
         }
 
+        // Oscillates the vertical angle and sets launchAngleY
         if (verticalAngle)
         {
             Oscillate(-80, -5);
@@ -176,8 +179,9 @@ public class BallLaunch : MonoBehaviour
 
     void PhysicsCalculations()
     {
+        // Using Mathf.Abs so numbers are not negative when calculating. Negative numbers will affect the final calculation
         // H = V^2 * sin^2(theta) / (2 * g)
-        maxHeight = (Mathf.Pow(launchSpeed, 2) * Mathf.Pow(Mathf.Sin(Mathf.Abs(launchAngleY)), 2)) / (2 * -Physics.gravity.y);
+        maxHeight = (Mathf.Pow(launchSpeed, 2) * Mathf.Pow(Mathf.Sin(Mathf.Abs(launchAngleY)), 2)) / (2 * Mathf.Abs(Physics.gravity.y));
 
         // These range and time calculations are not accurate because the ball will not be landing on the same level surface
 
@@ -188,10 +192,13 @@ public class BallLaunch : MonoBehaviour
         //airTime = (2 * launchSpeed * Mathf.Sin(launchAngleY)) / Physics.gravity.y;
     }
 
+    // Adds score
     void UpdateScore(float scoreAdded)
     {
         score += scoreAdded;
     }
+
+    // Collision checks
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Board")
@@ -207,6 +214,7 @@ public class BallLaunch : MonoBehaviour
         }
     }
 
+    // Trigger checks
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Start")
@@ -241,6 +249,7 @@ public class BallLaunch : MonoBehaviour
         }
     }
 
+    // Trigger exit checks
     private void OnTriggerExit(Collider other)
     {
 
