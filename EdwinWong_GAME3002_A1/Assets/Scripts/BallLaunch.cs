@@ -7,18 +7,18 @@ using TMPro;
 public class BallLaunch : MonoBehaviour
 {
     [SerializeField] GameObject oscillatingArrow;
-    [SerializeField] TMP_Text scoreCounter;
     [SerializeField] Slider launchSpeedSlider;
 
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] float launchSpeed;
-    [SerializeField] float launchAngleY;
-    [SerializeField] float launchAngleX;
+    [SerializeField] public float launchSpeed;
+    [SerializeField] public float launchSpeedMax;
+    [SerializeField] public float launchAngleY;
+    [SerializeField] public float launchAngleX;
 
     [SerializeField] float oscillateNumber;
 
-    float score;
+    public float score;
 
     bool isAtStart;
     bool oscillateFlip;
@@ -29,15 +29,15 @@ public class BallLaunch : MonoBehaviour
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
-        startPosition = new Vector3(0, 0.5f, 0);
+        startPosition = new Vector3(0, 1.5f, 0);
         launchSpeed = 0.0f;
+        launchSpeedMax = 30.0f;
         launchAngleY = 0.0f;
         launchAngleX = 0.0f;
         oscillateFlip = false;
         horizontalAngle = true;
         verticalAngle = false;
         score = 0;
-        scoreCounter.text = "Score: " + score;
         isAtStart = true;
     }
 
@@ -67,13 +67,6 @@ public class BallLaunch : MonoBehaviour
             verticalAngle = false;
         }
 
-        // Set launch speed
-        if (Input.GetKey(KeyCode.Space))
-        {
-            launchSpeed++;
-            launchSpeed = Mathf.Clamp(launchSpeed, 10.0f, 30.0f);
-        }
-
         // Fire the ball
         if (isAtStart)
         {
@@ -93,7 +86,6 @@ public class BallLaunch : MonoBehaviour
             oscillateNumber = 0;
             launchSpeed = 0;
         }
-        SliderBar(launchSpeed, 30.0f);
     }
 
     void FixedUpdate()
@@ -110,6 +102,13 @@ public class BallLaunch : MonoBehaviour
             Oscillate(-80, -5);
             oscillatingArrow.transform.rotation = Quaternion.Euler(oscillateNumber, launchAngleX, 0);
             launchAngleY = oscillateNumber;
+        }
+
+        // Set launch speed
+        if (Input.GetKey(KeyCode.Space))
+        {
+            launchSpeed++;
+            launchSpeed = Mathf.Clamp(launchSpeed, 10.0f, launchSpeedMax);
         }
     }
 
@@ -148,11 +147,6 @@ public class BallLaunch : MonoBehaviour
         }
     }
 
-    void SliderBar(float min, float max)
-    {
-        launchSpeedSlider.value = min / max;
-    }
-
     void UpdateScore(float scoreAdded)
     {
         score += scoreAdded;
@@ -166,20 +160,16 @@ public class BallLaunch : MonoBehaviour
         }
         if (other.tag == "100")
         {
-            scoreCounter.text = "Score: " + (score + 100);
             UpdateScore(100);
         }
         if (other.tag == "50")
         {
-            scoreCounter.text = "Score: " + (score + 50);
             UpdateScore(50);
         }
         if (other.tag == "25")
         {
-            scoreCounter.text = "Score: " + (score + 25);
             UpdateScore(25);
         }
-        Debug.Log(score);
     }
 
     private void OnTriggerExit(Collider other)
