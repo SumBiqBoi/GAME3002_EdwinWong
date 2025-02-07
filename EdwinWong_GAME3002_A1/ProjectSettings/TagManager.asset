@@ -8,6 +8,7 @@ TagManager:
   - 50
   - 25
   - Start
+  - Board
   layers:
   - Default
   - TransparentFX

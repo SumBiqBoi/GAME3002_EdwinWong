@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class BallLaunch : MonoBehaviour
 {
     [SerializeField] GameObject oscillatingArrow;
-    [SerializeField] Slider launchSpeedSlider;
 
     [SerializeField] Rigidbody rb;
 
@@ -18,12 +15,18 @@ public class BallLaunch : MonoBehaviour
 
     [SerializeField] float oscillateNumber;
 
+    public float maxHeight;
+    public float maxRange;
+    public float airTime;
     public float score;
 
-    bool isAtStart;
+    public bool isAtStart;
+    public bool hitBoard;
     bool oscillateFlip;
     bool horizontalAngle;
     bool verticalAngle;
+    bool startTime;
+    bool firstImpact;
     Vector3 startPosition;
 
     void Start()
@@ -34,11 +37,17 @@ public class BallLaunch : MonoBehaviour
         launchSpeedMax = 30.0f;
         launchAngleY = 0.0f;
         launchAngleX = 0.0f;
+        maxHeight = 0.0f;
+        maxRange = 0.0f;
+        airTime = 0.0f;
+        score = 0;
+        isAtStart = true;
+        hitBoard = false;
         oscillateFlip = false;
         horizontalAngle = true;
         verticalAngle = false;
-        score = 0;
-        isAtStart = true;
+        startTime = false;
+        firstImpact = false;
     }
 
     private void Update()
@@ -73,23 +82,32 @@ public class BallLaunch : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.F))
             {
                 LaunchBall();
+                startTime = true;
             }
         }
 
         // Resets the ball
         if (Input.GetKey(KeyCode.R))
         {
-            horizontalAngle = true;
-            verticalAngle = false;
             rb.velocity = Vector3.zero;
             transform.position = startPosition;
             oscillateNumber = 0;
             launchSpeed = 0;
+            horizontalAngle = true;
+            verticalAngle = false;
+            hitBoard = false;
+            startTime = false;
+            firstImpact = false;
         }
     }
 
     void FixedUpdate()
     {
+        if (startTime)
+        {
+            airTime += Time.deltaTime;
+        }
+
         if (horizontalAngle)
         {
             Oscillate(-45, 45);
@@ -110,6 +128,7 @@ public class BallLaunch : MonoBehaviour
             launchSpeed++;
             launchSpeed = Mathf.Clamp(launchSpeed, 10.0f, launchSpeedMax);
         }
+        PhysicsCalculations();
     }
 
     void LaunchBall()
@@ -147,9 +166,35 @@ public class BallLaunch : MonoBehaviour
         }
     }
 
+    void PhysicsCalculations()
+    {
+        // H = V^2 * sin^2(theta) / (2 * g)
+        maxHeight = (Mathf.Pow(launchSpeed, 2) * Mathf.Pow(Mathf.Sin(launchAngleY), 2)) / (2 * Physics.gravity.y);
+
+        // R = 2 * V^2 * cos(theta) * sin(theta) / g
+        //maxRange = (2 * Mathf.Pow(launchSpeed, 2) * Mathf.Cos(launchAngleY) * Mathf.Sin(launchAngleY)) / Physics.gravity.y;
+
+        // T = 2 * V(initial) * sin(theta) / g
+        //airTime = (2 * launchSpeed * Mathf.Sin(launchAngleY)) / Physics.gravity.y;
+    }
+
     void UpdateScore(float scoreAdded)
     {
         score += scoreAdded;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Board")
+        {
+            hitBoard = true;
+            startTime = false;
+        }
+
+        if (!firstImpact)
+        {
+            maxRange = transform.position.z;
+            firstImpact = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
