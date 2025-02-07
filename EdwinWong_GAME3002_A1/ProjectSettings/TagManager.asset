@@ -9,6 +9,7 @@ TagManager:
   - 25
   - Start
   - Board
+  - Reset
   layers:
   - Default
   - TransparentFX

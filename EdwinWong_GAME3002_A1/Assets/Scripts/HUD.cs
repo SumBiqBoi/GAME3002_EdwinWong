@@ -20,10 +20,14 @@ public class HUD : MonoBehaviour
     [SerializeField] BallLaunch ballLaunchScript;
     [SerializeField] Timer timerScript;
 
+    [SerializeField] Canvas endCanvas;
+
     void Start()
     {
         ballLaunchScript = FindObjectOfType<BallLaunch>();
         timerScript = GetComponentInChildren<Timer>();
+        gameObject.SetActive(true);
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -33,14 +37,20 @@ public class HUD : MonoBehaviour
         if (ballLaunchScript.isAtStart == false)
         {
             textLaunchSpeed.text = "Launch Speed: " + ballLaunchScript.launchSpeed;
-            textMaxHeight.text = "Max Height: " + ballLaunchScript.maxHeight;
-            textMaxRange.text = "Max Range: " + ballLaunchScript.maxRange;
-            textXAxisAngle.text = "X Axis Angle: " + ballLaunchScript.launchAngleX;
-            textYAxisAngle.text = "Y Axis Angle: " + ballLaunchScript.launchAngleY;
-            textAirTime.text = "Air Time: " + ballLaunchScript.airTime;
+            textMaxHeight.text = "Max Height: " + ballLaunchScript.maxHeight.ToString("F1");
+            textMaxRange.text = "Max Range: " + ballLaunchScript.maxRange.ToString("F1");
+            textAirTime.text = "Air Time: " + ballLaunchScript.airTime.ToString("F1");
         }
-        textTimeLeft.text = "Time Left: " + timerScript.remainingTime.ToString("F0");
+        textXAxisAngle.text = "X Axis Angle: " + ballLaunchScript.launchAngleX;
+        textYAxisAngle.text = "Y Axis Angle: " + Mathf.Abs(ballLaunchScript.launchAngleY);
+        textTimeLeft.text = "Time Left: " + timerScript.remainingTime.ToString("F0") + " sec";
         textScoreCounter.text = "Score: " + ballLaunchScript.score;
+
+        if (timerScript.remainingTime <= 0)
+        {
+            Time.timeScale = 0;
+            endCanvas.enabled = true;
+        }
     }
 
     void SliderBar(float min, float max)

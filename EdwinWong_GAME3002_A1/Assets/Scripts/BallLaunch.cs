@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallLaunch : MonoBehaviour
@@ -48,6 +49,8 @@ public class BallLaunch : MonoBehaviour
         verticalAngle = false;
         startTime = false;
         firstImpact = false;
+
+        rb.freezeRotation = true;
     }
 
     private void Update()
@@ -98,7 +101,10 @@ public class BallLaunch : MonoBehaviour
             hitBoard = false;
             startTime = false;
             firstImpact = false;
+
+            rb.freezeRotation = true;
         }
+        Debug.Log(firstImpact);
     }
 
     void FixedUpdate()
@@ -127,6 +133,8 @@ public class BallLaunch : MonoBehaviour
         {
             launchSpeed++;
             launchSpeed = Mathf.Clamp(launchSpeed, 10.0f, launchSpeedMax);
+
+            rb.freezeRotation = false;
         }
         PhysicsCalculations();
     }
@@ -169,7 +177,9 @@ public class BallLaunch : MonoBehaviour
     void PhysicsCalculations()
     {
         // H = V^2 * sin^2(theta) / (2 * g)
-        maxHeight = (Mathf.Pow(launchSpeed, 2) * Mathf.Pow(Mathf.Sin(launchAngleY), 2)) / (2 * Physics.gravity.y);
+        maxHeight = (Mathf.Pow(launchSpeed, 2) * Mathf.Pow(Mathf.Sin(Mathf.Abs(launchAngleY)), 2)) / (2 * -Physics.gravity.y);
+
+        // These range and time calculations are not accurate because the ball will not be landing on the same level surface
 
         // R = 2 * V^2 * cos(theta) * sin(theta) / g
         //maxRange = (2 * Mathf.Pow(launchSpeed, 2) * Mathf.Cos(launchAngleY) * Mathf.Sin(launchAngleY)) / Physics.gravity.y;
@@ -190,7 +200,7 @@ public class BallLaunch : MonoBehaviour
             startTime = false;
         }
 
-        if (!firstImpact)
+        if (collision.gameObject.tag == "Board" && !firstImpact)
         {
             maxRange = transform.position.z;
             firstImpact = true;
@@ -202,6 +212,20 @@ public class BallLaunch : MonoBehaviour
         if (other.tag == "Start")
         {
             isAtStart = true;
+        }
+        if (other.tag == "Reset")
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = startPosition;
+            oscillateNumber = 0;
+            launchSpeed = 0;
+            horizontalAngle = true;
+            verticalAngle = false;
+            hitBoard = false;
+            startTime = false;
+            firstImpact = false;
+
+            rb.freezeRotation = true;
         }
         if (other.tag == "100")
         {
