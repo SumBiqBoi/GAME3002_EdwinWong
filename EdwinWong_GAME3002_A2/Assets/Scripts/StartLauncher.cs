@@ -5,6 +5,8 @@ using UnityEngine;
 public class StartLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject startLauncher;
+    [SerializeField] private GameObject startPos;
+    [SerializeField] private GameObject endPos;
     [SerializeField] private float powerAmount;
     private Rigidbody rb;
 
@@ -21,10 +23,6 @@ public class StartLauncher : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             Launcher();
-            if (startLauncher.transform.position.y <= 0)
-            {
-                powerAmount = 0;
-            }
         }
 
         else if (Input.GetKeyUp(KeyCode.Space))
@@ -32,6 +30,15 @@ public class StartLauncher : MonoBehaviour
             rb.isKinematic = false;
             StartCoroutine(WaitAndReset());
         }
+        if (startLauncher.transform.position.y >= startPos.transform.position.y)
+        {
+            rb.velocity = Vector3.zero;
+        }
+        if (startLauncher.transform.position.y <= endPos.transform.position.y)
+        {
+            powerAmount = 0;
+        }
+                Debug.Log(powerAmount);
     }
 
     private void Launcher()
