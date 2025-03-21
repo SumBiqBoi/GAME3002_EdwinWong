@@ -7,14 +7,14 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] GameOver gameOverScript;
 
-    [SerializeField] GameObject pinball;
-    [SerializeField] GameObject startPosition;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text pinballAmountText;
+    [SerializeField] public GameObject pinball;
+    [SerializeField] public GameObject startPosition;
+    [SerializeField] public TMP_Text scoreText;
+    [SerializeField] public TMP_Text pinballAmountText;
     [SerializeField] GameObject gameOver;
 
-    private int score = 0;
-    private int pinballCount = 3;
+    public int score = 0;
+    public int pinballCount = 1;
 
     void Start()
     {
@@ -36,14 +36,18 @@ public class UIHandler : MonoBehaviour
             {
                 if (score >= gameOverScript.highScore)
                 {
-                    gameOverScript.highScoreText.text = scoreText.text;
+                    gameOverScript.highScore = score;
+                    gameOverScript.highScoreText.text = "" + gameOverScript.highScore;
                 }
-                gameOverScript.finalScoreText.text = scoreText.text;
+                gameOverScript.finalScoreText.text = "" + score;
                 gameOver.SetActive(true);
                 Time.timeScale = 0;
             }
-            pinball.transform.position = startPosition.transform.position;
-            pinballCount--;
+            else
+            {
+                pinball.transform.position = startPosition.transform.position;
+                pinballCount--;
+            }
             pinballAmountText.text = "Pinballs Left: " + pinballCount;
         }
     }

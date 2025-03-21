@@ -30,15 +30,16 @@ public class StartLauncher : MonoBehaviour
             rb.isKinematic = false;
             StartCoroutine(WaitAndReset());
         }
+
         if (startLauncher.transform.position.y >= startPos.transform.position.y)
         {
             rb.velocity = Vector3.zero;
         }
+
         if (startLauncher.transform.position.y <= endPos.transform.position.y)
         {
             powerAmount = 0;
         }
-                Debug.Log(powerAmount);
     }
 
     private void Launcher()
