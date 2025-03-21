@@ -5,22 +5,31 @@ using UnityEngine;
 public class Bouncer : MonoBehaviour
 {
 
-    [SerializeField] float bounceForce = 20;
+    float bounceForce = 2;
+
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
-        Vector3 displacement = collision.gameObject.transform.position - transform.position;
+        // Normal calculation
+        Vector3 surfaceNormal = collision.contacts[0].normal;
 
-        float distance = displacement.magnitude;
+        // Direction calculation
+        // direction = destination - source
 
-        //Get Velocity and Normalize it from the collisions.contact[0]
+        //Vector3 direction = transform.position - collision.gameObject.transform.forward;
 
         Vector3 velocity = rb.velocity;
 
         float beforeSpeed = velocity.magnitude;
-        Vector3 collisionDirection = Vector3.Reflect(velocity.normalized, collision.contacts[0].normal);
 
-        rb.velocity = new Vector3(collisionDirection.x, 0.0f, collisionDirection.z) * bounceForce;
+        Vector3 collisionDirection = Vector3.Reflect(velocity, surfaceNormal);
+        
+        rb.velocity = collisionDirection.normalized * beforeSpeed * bounceForce;
+
+        if (surfaceNormal.y > 0.5f)
+        {
+            rb.AddForce(Vector3.up * Mathf.Abs(beforeSpeed) * bounceForce, ForceMode.Impulse);
+        }
     }
 }
