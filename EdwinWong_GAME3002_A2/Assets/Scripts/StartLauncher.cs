@@ -5,10 +5,9 @@ using UnityEngine;
 public class StartLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject startLauncher;
+    [SerializeField] private float powerAmount;
     private Rigidbody rb;
 
-    private float launcherPullBack;
-    [SerializeField] private float powerAmount;
 
     void Start()
     {
@@ -22,7 +21,10 @@ public class StartLauncher : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             Launcher();
-            Debug.Log(launcherPullBack);
+            if (startLauncher.transform.position.y <= 0)
+            {
+                powerAmount = 0;
+            }
         }
 
         else if (Input.GetKeyUp(KeyCode.Space))
@@ -44,6 +46,7 @@ public class StartLauncher : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         startLauncher.transform.localPosition = new Vector3(0.0F, 3.5f, 0.0f);
         rb.isKinematic = true;
+        powerAmount = 2;
 
         StopCoroutine(WaitAndReset());
     }
