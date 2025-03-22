@@ -610,6 +610,38 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 672179152}
   m_SourcePrefab: {fileID: 100100000, guid: 44bf0ed7c70c4674cacf22ed182ce7a9, type: 3}
+--- !u!1 &140203066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 140203067}
+  m_Layer: 0
+  m_Name: PinballParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &140203067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140203066}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 517688423}
+  m_Father: {fileID: 718685779}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &162283231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,10 +1613,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b602980e45732499fe86c65aed48d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiHandler: {fileID: 0}
   gameOver: {fileID: 855301774}
-  restartButton: {fileID: 0}
-  finalScoreText: {fileID: 0}
-  highScoreText: {fileID: 0}
+  restartButton: {fileID: 1129591892}
+  finalScoreText: {fileID: 1718066625}
+  highScoreText: {fileID: 1407244573}
   highScore: 0
 --- !u!1001 &404420019
 PrefabInstance:
@@ -1669,15 +1702,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 718685779}
+    m_TransformParent: {fileID: 140203067}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.025400002
+      value: 0.0254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.025400002
+      value: 0.0254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1685,7 +1718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.65
+      value: 7.6500006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1693,7 +1726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40313d6a9550713459ff701d4ee914a1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1932,6 +1965,8 @@ MonoBehaviour:
   scoreText: {fileID: 2084228406}
   pinballAmountText: {fileID: 947204904}
   gameOver: {fileID: 855301774}
+  score: 0
+  pinballCount: 1
 --- !u!4 &518614861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cc6f2bb648eb57c4a977295b898ea387, type: 3}
@@ -2062,7 +2097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!1 &536685909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9201606159226136137, guid: e374c7de3f464f34582d167ad65ca2ed, type: 3}
@@ -2080,7 +2114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!4 &547754895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2bf8169fc2510944ab642276b060d604, type: 3}
@@ -2527,6 +2560,7 @@ Transform:
   - {fileID: 120383682}
   - {fileID: 2137751870}
   - {fileID: 46737668}
+  - {fileID: 843997813}
   m_Father: {fileID: 353655806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
@@ -2662,7 +2696,7 @@ Transform:
   - {fileID: 920607288}
   - {fileID: 604630685}
   - {fileID: 260219523}
-  - {fileID: 517688423}
+  - {fileID: 140203067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!1 &719909708
@@ -2951,6 +2985,59 @@ Transform:
   - {fileID: 1139629009}
   m_Father: {fileID: 718685779}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &843997812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 843997813}
+  - component: {fileID: 843997814}
+  m_Layer: 0
+  m_Name: Collider15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &843997813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843997812}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 19.95, y: 8.08, z: 21.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 702804373}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &843997814
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843997812}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.6623135, y: 0.72536874, z: 23.510677}
+  m_Center: {x: -1.4643335, y: -1.6413959, z: 1.8287725}
 --- !u!1 &855301774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3911,7 +3998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!1001 &1058622192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6514,7 +6600,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564939828}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6913,7 +6999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!4 &1657355075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8428905204925611251, guid: e374c7de3f464f34582d167ad65ca2ed, type: 3}
@@ -6931,7 +7016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!4 &1668531065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da199570821e4a0428fa754768fb7d33, type: 3}
@@ -7121,7 +7205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!1 &1698365367 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34ba9cf5411488e4c8ce62f60dfa140c, type: 3}
@@ -8491,7 +8574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!1 &1898554847
 GameObject:
   m_ObjectHideFlags: 0
@@ -8739,7 +8821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900996cdd93281340867ae39194e569c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!1001 &1920678986
 PrefabInstance:
   m_ObjectHideFlags: 0
