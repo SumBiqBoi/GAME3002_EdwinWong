@@ -18,7 +18,6 @@ public class Flipper : MonoBehaviour
         hJoint.useSpring = true;
 
         // JointSpring is used to add a spring force to HingeJoint
-
         jSpring = new JointSpring();
         jSpring.spring = springConst;
         jSpring.damper = flipperSpringDamp;

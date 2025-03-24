@@ -33,19 +33,20 @@ public class StartLauncher : MonoBehaviour
 
         if (startLauncher.transform.position.z >= startPos.transform.position.z)
         {
+            // Dampen hingejoint movement after launch
             rb.velocity = Vector3.zero;
         }
 
         if (startLauncher.transform.position.z <= endPos.transform.position.z)
         {
+            // Stop moving launcher after it reaches certain position
             powerAmount = 0;
         }
     }
 
     private void Launcher()
     {
-        //launcherPullBack = startLauncher.transform.forward;
-
+        // Move launcher back based on powerAmount
         startLauncher.transform.localPosition += -startLauncher.transform.forward * powerAmount * Time.deltaTime;
     }
 
@@ -53,6 +54,7 @@ public class StartLauncher : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         startLauncher.transform.localPosition = new Vector3(0.0F, 3.5f, 0.0f);
+        // Enable Kinematic so the hingejoint doesn't try to launch
         rb.isKinematic = true;
         powerAmount = 2;
 
