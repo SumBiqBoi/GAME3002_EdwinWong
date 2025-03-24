@@ -31,12 +31,12 @@ public class StartLauncher : MonoBehaviour
             StartCoroutine(WaitAndReset());
         }
 
-        if (startLauncher.transform.position.y >= startPos.transform.position.y)
+        if (startLauncher.transform.position.z >= startPos.transform.position.z)
         {
             rb.velocity = Vector3.zero;
         }
 
-        if (startLauncher.transform.position.y <= endPos.transform.position.y)
+        if (startLauncher.transform.position.z <= endPos.transform.position.z)
         {
             powerAmount = 0;
         }

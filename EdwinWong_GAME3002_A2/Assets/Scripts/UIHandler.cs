@@ -10,16 +10,19 @@ public class UIHandler : MonoBehaviour
     [SerializeField] public GameObject pinball;
     [SerializeField] public GameObject startPosition;
     [SerializeField] public TMP_Text scoreText;
+    [SerializeField] public TMP_Text highScoreText;
     [SerializeField] public TMP_Text pinballAmountText;
     [SerializeField] GameObject gameOver;
 
     public int score = 0;
+    public int highScore = 0;
     public int pinballCount = 1;
 
     void Start()
     {
         gameOverScript = FindObjectOfType<GameOver>();
         scoreText.text = "Score: " + score;
+        highScoreText.text = "High Score: " + highScore;
         pinballAmountText.text = "Pinballs Left: " + pinballCount;
     }
 
@@ -29,15 +32,30 @@ public class UIHandler : MonoBehaviour
         {
             score += 100;
             scoreText.text = "Score: " + score;
+            if (score >= highScore)
+            {
+                highScore = score;
+                highScoreText.text = "High Score: " + highScore;
+            }
+        }
+        if (collision.gameObject.tag == "BashToy")
+        {
+            score += 350;
+            scoreText.text = "Score: " + score;
+            if (score >= highScore)
+            {
+                highScore = score;
+                highScoreText.text = "High Score: " + highScore;
+            }
         }
         if (collision.gameObject.tag == "EndZone")
         {
             if (pinballCount == 0)
             {
-                if (score >= gameOverScript.highScore)
+                if (score >= highScore)
                 {
-                    gameOverScript.highScore = score;
-                    gameOverScript.highScoreText.text = "" + gameOverScript.highScore;
+                    highScore = score;
+                    gameOverScript.highScoreText.text = "" + highScore;
                 }
                 gameOverScript.finalScoreText.text = "" + score;
                 gameOver.SetActive(true);

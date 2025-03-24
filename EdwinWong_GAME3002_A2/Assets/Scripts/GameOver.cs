@@ -12,8 +12,6 @@ public class GameOver : MonoBehaviour
     [SerializeField] public TMP_Text finalScoreText;
     [SerializeField] public TMP_Text highScoreText;
 
-    public float highScore;
-
     private void Start()
     {
         uiHandler = FindObjectOfType<UIHandler>();

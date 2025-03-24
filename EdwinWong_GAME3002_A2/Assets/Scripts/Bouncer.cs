@@ -4,32 +4,39 @@ using UnityEngine;
 
 public class Bouncer : MonoBehaviour
 {
+    [SerializeField] bool isSlowBumper = false;
 
-    float bounceForce = 2;
+    [SerializeField] float bounceForce;
+    float minBounceSpeed = 1.0f;
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isSlowBumper)
+        {
+            bounceForce = 0.5f;
+        }
+        else
+        {
+            bounceForce = 3f;
+        }
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
-        // Normal calculation
-        Vector3 surfaceNormal = collision.contacts[0].normal;
-
-        // Direction calculation
-        // direction = destination - source
-
-        //Vector3 direction = transform.position - collision.gameObject.transform.forward;
-
-        Vector3 velocity = rb.velocity;
-
-        float beforeSpeed = velocity.magnitude;
-
-        Vector3 collisionDirection = Vector3.Reflect(velocity, surfaceNormal);
-        
-        rb.velocity = collisionDirection.normalized * beforeSpeed * bounceForce;
-
-        if (surfaceNormal.y > 0.5f)
+        // Original speed
+        float beforeSpeed = rb.velocity.magnitude;
+        if (beforeSpeed < 1)
         {
-            rb.AddForce(Vector3.up * Mathf.Abs(beforeSpeed) * bounceForce, ForceMode.Impulse);
+            beforeSpeed = 1;
         }
+
+        Vector3 inDirection = rb.velocity.normalized;
+        Vector3 inNormal = collision.contacts[0].normal;
+
+        Vector3 collisionDirection = Vector3.Reflect(inDirection, inNormal).normalized;
+
+        // Apply new direction * original speed * bounce force
+        rb.velocity = collisionDirection * beforeSpeed * bounceForce;
+
+        Debug.DrawRay(collision.contacts[0].point, inDirection * 2, Color.red, 2.0f); 
+        Debug.DrawRay(collision.contacts[0].point, inNormal * 2, Color.green, 2.0f);
     }
 }
