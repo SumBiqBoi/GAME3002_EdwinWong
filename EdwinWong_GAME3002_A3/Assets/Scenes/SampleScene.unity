@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 76914788}
   - component: {fileID: 76914787}
   m_Layer: 0
-  m_Name: Finish Platform
+  m_Name: Start Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 225220215}
   - component: {fileID: 225220214}
   m_Layer: 0
-  m_Name: Finish Platform (11)
+  m_Name: Training Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 317539879}
   - component: {fileID: 317539878}
   m_Layer: 0
-  m_Name: Finish Platform (6)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 512404113}
   - component: {fileID: 512404112}
   m_Layer: 0
-  m_Name: Finish Platform (9)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 723840969}
   - component: {fileID: 723840968}
   m_Layer: 0
-  m_Name: Start Platform (1)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 1087697038}
   - component: {fileID: 1087697037}
   m_Layer: 0
-  m_Name: Start Platform
+  m_Name: Finish Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -952,7 +952,7 @@ GameObject:
   - component: {fileID: 1262647524}
   - component: {fileID: 1262647523}
   m_Layer: 0
-  m_Name: Finish Platform (8)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 1296533710}
   - component: {fileID: 1296533709}
   m_Layer: 0
-  m_Name: Finish Platform (1)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 1368247336}
   - component: {fileID: 1368247335}
   m_Layer: 0
-  m_Name: Finish Platform (3)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1267,7 +1267,7 @@ GameObject:
   - component: {fileID: 1399578279}
   - component: {fileID: 1399578278}
   m_Layer: 0
-  m_Name: Start Platform (4)
+  m_Name: Checkpoint Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1329,7 +1329,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98b6f9f32bc22c949990ccc293183203, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 1461611952}
   - component: {fileID: 1461611951}
   m_Layer: 0
-  m_Name: Start Platform (2)
+  m_Name: Checkpoint Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1434,7 +1434,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98b6f9f32bc22c949990ccc293183203, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1477,7 +1477,7 @@ GameObject:
   - component: {fileID: 1523163810}
   - component: {fileID: 1523163809}
   m_Layer: 0
-  m_Name: Start Platform (5)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1582,7 +1582,7 @@ GameObject:
   - component: {fileID: 1539892176}
   - component: {fileID: 1539892175}
   m_Layer: 0
-  m_Name: Start Platform (3)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 1548648899}
   - component: {fileID: 1548648898}
   m_Layer: 0
-  m_Name: Finish Platform (4)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1792,7 +1792,7 @@ GameObject:
   - component: {fileID: 1662879077}
   - component: {fileID: 1662879076}
   m_Layer: 0
-  m_Name: Finish Platform (5)
+  m_Name: Checkpoint Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1854,7 +1854,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98b6f9f32bc22c949990ccc293183203, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1913,22 +1913,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 225220213}
   - {fileID: 76914786}
+  - {fileID: 1662879075}
+  - {fileID: 1977262269}
+  - {fileID: 1399578277}
+  - {fileID: 1461611950}
+  - {fileID: 1087697036}
   - {fileID: 2091976118}
   - {fileID: 1262647522}
   - {fileID: 512404111}
   - {fileID: 1946485393}
-  - {fileID: 225220213}
   - {fileID: 1548648897}
-  - {fileID: 1662879075}
   - {fileID: 317539877}
-  - {fileID: 1977262269}
   - {fileID: 1368247334}
   - {fileID: 1296533708}
-  - {fileID: 1087697036}
-  - {fileID: 1461611950}
   - {fileID: 1539892174}
-  - {fileID: 1399578277}
   - {fileID: 1523163808}
   - {fileID: 723840967}
   m_Father: {fileID: 0}
@@ -1946,7 +1946,7 @@ GameObject:
   - component: {fileID: 1946485395}
   - component: {fileID: 1946485394}
   m_Layer: 0
-  m_Name: Finish Platform (10)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2051,7 +2051,7 @@ GameObject:
   - component: {fileID: 1977262271}
   - component: {fileID: 1977262270}
   m_Layer: 0
-  m_Name: Finish Platform (2)
+  m_Name: Checkpoint Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2113,7 +2113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98b6f9f32bc22c949990ccc293183203, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 2091976120}
   - component: {fileID: 2091976119}
   m_Layer: 0
-  m_Name: Finish Platform (7)
+  m_Name: Obstacle Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
