@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Transform cam;
     [SerializeField] float moveSpeed = 20;
 
     private Rigidbody rb;
@@ -17,10 +18,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity += Vector3.forward * Time.deltaTime;
-        }
+        float horInput = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        float verInput = Input.GetAxisRaw("Vertical") * moveSpeed;
+
+        Vector3 camForward = cam.forward;
+        Vector3 camRight = cam.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        rb.velocity = new Vector3(horInput, rb.velocity.y, verInput);
+
+        transform.forward = new Vector3(rb.velocity.x, 0, rb.velocity.z);
     }
 
     private void FixedUpdate()
