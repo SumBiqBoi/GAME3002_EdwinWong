@@ -26,7 +26,7 @@ public class SpinningPole : MonoBehaviour
     void Update()
     {
         // Ping pong the position so it moves from end to end
-        transform.position = new Vector3(Mathf.PingPong(Time.time * speed, maxOffsetX - minOffsetX) + minOffsetX, defaultY, defaultZ);
+        transform.position = new Vector3(Mathf.PingPong(Time.time, maxOffsetX - minOffsetX) + -54, defaultY, defaultZ);
     }
 
     private void FixedUpdate()
