@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    Vector3 com;
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb.centerOfMass = com;
     }
 
     void Update()
