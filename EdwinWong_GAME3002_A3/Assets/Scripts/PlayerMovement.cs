@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private List<SimpleTorque> wheelList;
-    [SerializeField] private float maxAccelForce;
-    [SerializeField] private float forceMultiplier;
-    [SerializeField] private float forceDeceleration;
 
     [SerializeField] GameObject com;
 
@@ -19,13 +15,11 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
 
     Vector3 moveDirection;
-    Vector3 vForce;
 
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         rb.centerOfMass = com.transform.position;
     }
 
@@ -50,11 +44,6 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
-
-        foreach (SimpleTorque wheel in wheelList)
-        {
-            wheel.OnAccelerate(vForce + moveDirection.normalized * moveSpeed);
-        }
+        rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
     }
 }
