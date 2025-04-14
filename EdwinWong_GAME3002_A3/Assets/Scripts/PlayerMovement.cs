@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject com;
-
     public float moveSpeed;
 
     public Transform orientation;
@@ -64,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.freezeRotation = true;
             rb.freezeRotation = false;
+        }
+
+        if (other.gameObject.tag == "Finish")
+        {
+            EndCanvas.instance.endCanvas.SetActive(true);
         }
     }
 }
