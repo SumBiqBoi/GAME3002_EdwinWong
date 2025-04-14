@@ -27,9 +27,9 @@ public class EndCanvas : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Start()
     {
-        
+        endCanvas.SetActive(false);
     }
 
     public void RestartGame()
