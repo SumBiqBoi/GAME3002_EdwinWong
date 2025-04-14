@@ -8,8 +8,8 @@ public class SpinningPole : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float maxOffsetX = 5f;
     [SerializeField] private float minOffsetX = -5f;
+    [SerializeField] private float startXPosition = -5f;
 
-    private float defaultX = 0f;
     private float defaultY = 0f;
     private float defaultZ = 0f;
 
@@ -27,7 +27,7 @@ public class SpinningPole : MonoBehaviour
     void Update()
     {
         // Ping pong the position so it moves from end to end
-        transform.position = new Vector3(Mathf.PingPong(Time.time, maxOffsetX - minOffsetX) + minOffsetX, defaultY, defaultZ);
+        transform.position = new Vector3(Mathf.PingPong(Time.time * speed, maxOffsetX - minOffsetX) + startXPosition, defaultY, defaultZ);
     }
 
     private void FixedUpdate()
