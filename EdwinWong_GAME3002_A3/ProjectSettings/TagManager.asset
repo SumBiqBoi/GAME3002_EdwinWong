@@ -9,6 +9,8 @@ TagManager:
   - Trigger2
   - Trigger3
   - Wheels
+  - CheckPoint
+  - Killbox
   layers:
   - Default
   - TransparentFX

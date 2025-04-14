@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    [SerializeField] GameObject player;
     [SerializeField] GameObject com;
 
     public float moveSpeed;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
 
     Vector3 moveDirection;
+    public Vector3 checkpointPos;
 
     [SerializeField] Rigidbody rb;
 
@@ -45,5 +47,23 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "CheckPoint")
+        {
+            Checkpoint checkpoint = other.GetComponent<Checkpoint>();
+            checkpointPos = checkpoint.spawnLocation.transform.position;
+        }
+
+        if (other.gameObject.tag == "Killbox")
+        {
+            player.transform.position = checkpointPos;
+            player.transform.eulerAngles = new Vector3(-90, 0, 0);
+            rb.velocity = Vector3.zero;
+            rb.freezeRotation = true;
+            rb.freezeRotation = false;
+        }
     }
 }
