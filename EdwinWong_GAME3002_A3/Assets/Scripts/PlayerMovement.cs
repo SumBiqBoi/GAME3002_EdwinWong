@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInput();
         Debug.Log(EndCanvas.instance.multiplierValue);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("game");
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            player.transform.position = checkpointPos;
+        }
     }
 
     private void FixedUpdate()
