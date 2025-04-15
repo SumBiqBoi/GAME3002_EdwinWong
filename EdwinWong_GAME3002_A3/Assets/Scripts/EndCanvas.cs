@@ -15,6 +15,8 @@ public class EndCanvas : MonoBehaviour
     float score;
     float highScore;
 
+    public bool isCanvasTrue;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,17 +32,20 @@ public class EndCanvas : MonoBehaviour
     private void Start()
     {
         endCanvas.SetActive(false);
+        isCanvasTrue = false;
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene("game");
         endCanvas.SetActive(false);
+        isCanvasTrue = false;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene("Start");
         endCanvas.SetActive(false);
+        isCanvasTrue = false;
     }
 }

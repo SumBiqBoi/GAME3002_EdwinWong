@@ -13,7 +13,7 @@ public class ThirdPersonCam : MonoBehaviour
 
     void Start()
     {
-        if (EndCanvas.instance.endCanvas != true)
+        if (EndCanvas.instance.isCanvasTrue == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
