@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] TMP_Text timeText;
 
-    private float elapsedTime = 0;
+    public float elapsedTime = 0;
     private int minutes;
     private int seconds;
 

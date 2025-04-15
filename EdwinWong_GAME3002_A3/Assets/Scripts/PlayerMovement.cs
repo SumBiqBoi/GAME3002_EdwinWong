@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject com;
+    [SerializeField] GameObject cartBed;
     public float moveSpeed;
 
     public Transform orientation;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         PlayerInput();
+        Debug.Log(EndCanvas.instance.multiplierValue);
     }
 
     private void FixedUpdate()
@@ -67,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Finish")
         {
+            Time.timeScale = 0f;
             EndCanvas.instance.endCanvas.SetActive(true);
             EndCanvas.instance.isCanvasTrue = true;
             Cursor.lockState = CursorLockMode.None;
