@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         PlayerInput();
-        Debug.Log(EndCanvas.instance.multiplierValue);
+
+        Debug.Log(EndCanvas.instance.score);
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             player.transform.position = checkpointPos;
+            player.transform.eulerAngles = new Vector3(-90, 0, 0);
         }
     }
 

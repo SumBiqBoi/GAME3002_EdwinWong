@@ -14,10 +14,8 @@ public class EndCanvas : MonoBehaviour
     [SerializeField] Button restartButton;
     [SerializeField] Button mainMenuButton;
     [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text highScoreText;
 
-    float score;
-    float highScore;
+    public float score;
     public float multiplierValue = 1;
 
     public bool hasSphere = true;
@@ -50,6 +48,7 @@ public class EndCanvas : MonoBehaviour
         score = (multiplierValue / timerScript.elapsedTime) * 100000;
 
         scoreText.text = score.ToString("F0");
+
     }
 
     public void RestartGame()

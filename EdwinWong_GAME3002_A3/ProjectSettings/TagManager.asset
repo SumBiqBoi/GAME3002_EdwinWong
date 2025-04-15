@@ -11,6 +11,9 @@ TagManager:
   - Wheels
   - CheckPoint
   - Killbox
+  - Sphere
+  - Capsule
+  - Cube
   layers:
   - Default
   - TransparentFX
