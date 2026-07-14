@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinningPole : MonoBehaviour
+public class SpinningPoleeee : MonoBehaviour
 {
     [SerializeField] private Vector3 torque;
     [SerializeField] private float speed;
