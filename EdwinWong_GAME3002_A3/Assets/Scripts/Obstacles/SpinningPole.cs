@@ -12,32 +12,33 @@ public class SpinningPole : MonoBehaviour
 
     [SerializeField] float moveSpeed;
 
-    float reboundMax;
-    float reboundMin;
+    Vector3 startPosition;
 
     void Start()
     {
-        reboundMin = transform.position.x;
-        reboundMax = maxDistance + pole.transform.localPosition.x;
+        startPosition = pole.transform.position;
     }
 
     void Update()
     {
-        pole.transform.position = new Vector3(direction.position.x + (moveSpeed * Time.deltaTime), direction.position.y, direction.position.z);
+        pole.transform.position += pole.transform.forward * moveSpeed * Time.deltaTime;
 
-        if (pole.transform.localPosition.x > reboundMax)
-        {
-            Rebound();
-        }
+        float forwardDistanceFromStart = Vector3.Dot(pole.transform.position - startPosition, pole.transform.forward);
 
-        if (pole.transform.localPosition.x < reboundMin)
-        {
-            Rebound();
-        }
+        Rebound(forwardDistanceFromStart);
+
+        Debug.Log(forwardDistanceFromStart);
     }
 
-    void Rebound()
+    void Rebound(float distanceCheck)
     {
-        moveSpeed *= -1;
+        if (distanceCheck > maxDistance)
+        {
+            moveSpeed = -Mathf.Abs(moveSpeed);
+        }
+        else if (distanceCheck < minDistance)
+        {
+            moveSpeed = Mathf.Abs(moveSpeed);
+        }
     }
 }
