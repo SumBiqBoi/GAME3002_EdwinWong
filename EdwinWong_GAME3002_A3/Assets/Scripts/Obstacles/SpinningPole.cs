@@ -6,11 +6,11 @@ public class SpinningPole : MonoBehaviour
 {
     [SerializeField] GameObject pole;
     [SerializeField] GameObject spinningObstacle;
-    [SerializeField] Transform direction;
     [SerializeField] float maxDistance;
     [SerializeField] float minDistance;
 
     [SerializeField] float moveSpeed;
+    [SerializeField] float spinSpeed;
 
     Vector3 startPosition;
 
@@ -20,6 +20,13 @@ public class SpinningPole : MonoBehaviour
     }
 
     void Update()
+    {
+        MovePole();
+
+        SpinPole();
+    }
+
+    void MovePole()
     {
         pole.transform.position += pole.transform.forward * moveSpeed * Time.deltaTime;
 
@@ -40,5 +47,10 @@ public class SpinningPole : MonoBehaviour
         {
             moveSpeed = Mathf.Abs(moveSpeed);
         }
+    }
+
+    void SpinPole()
+    {
+        spinningObstacle.transform.rotation *= Quaternion.Euler(0, 0, spinSpeed);
     }
 }

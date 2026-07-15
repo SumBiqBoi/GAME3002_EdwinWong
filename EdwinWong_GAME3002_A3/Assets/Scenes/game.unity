@@ -1568,7 +1568,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 942527341185168804, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.17
+      value: -55.52
       objectReference: {fileID: 0}
     - target: {fileID: 942527341185168804, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1609,14 +1609,6 @@ PrefabInstance:
     - target: {fileID: 3795594855635758915, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_Name
       value: SpinningPole
-      objectReference: {fileID: 0}
-    - target: {fileID: 8237665242191595871, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
-      propertyPath: maxDistance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8237665242191595871, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
-      propertyPath: minDistance
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7196,7 +7188,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 942527341185168804, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.31
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 942527341185168804, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7257,6 +7249,10 @@ PrefabInstance:
     - target: {fileID: 6157655232604229212, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237665242191595871, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
+      propertyPath: spinSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8237665242191595871, guid: 3c840e62db8ee1f4983969996ccd3401, type: 3}
       propertyPath: maxDistance
