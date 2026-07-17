@@ -33,8 +33,6 @@ public class SpinningPole : MonoBehaviour
         float forwardDistanceFromStart = Vector3.Dot(pole.transform.position - startPosition, pole.transform.forward);
 
         Rebound(forwardDistanceFromStart);
-
-        Debug.Log(forwardDistanceFromStart);
     }
 
     void Rebound(float distanceCheck)
