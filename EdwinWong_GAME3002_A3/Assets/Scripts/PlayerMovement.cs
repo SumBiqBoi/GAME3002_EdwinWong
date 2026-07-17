@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject com;
     [SerializeField] GameObject cartBed;
     public float moveSpeed;
+    public float rotateSpeed;
 
     public Transform orientation;
 
@@ -36,6 +37,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("game");
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z - rotateSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z + rotateSpeed * Time.deltaTime);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {

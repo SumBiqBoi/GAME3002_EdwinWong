@@ -1074,6 +1074,7 @@ MonoBehaviour:
   com: {fileID: 312074894}
   cartBed: {fileID: 0}
   moveSpeed: 17
+  rotateSpeed: 20
   orientation: {fileID: 243897208}
   checkpointPos: {x: 0, y: 0, z: 0}
   rb: {fileID: 141771126}
