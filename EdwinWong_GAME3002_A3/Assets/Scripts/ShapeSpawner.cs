@@ -7,8 +7,9 @@ public class ShapeSpawner : MonoBehaviour
     LinkedList<ShapeData> shapeSpawnList = new LinkedList<ShapeData>();
 
     [SerializeField] Transform shapeSpawnPosition;
-
     [SerializeField] float setSpawnTime;
+
+    Quaternion spawnRotation;
 
     float timerToSpawnShape;
 
@@ -16,6 +17,8 @@ public class ShapeSpawner : MonoBehaviour
 
     private void Start()
     {
+        spawnRotation = Quaternion.identity;
+
         isStartTimer = false;
 
         timerToSpawnShape = setSpawnTime;
@@ -31,7 +34,7 @@ public class ShapeSpawner : MonoBehaviour
             {
                 foreach (ShapeData shapeData in shapeSpawnList)
                 {
-                    Instantiate(shapeData.shapePrefab, shapeSpawnPosition);
+                    GameObject newShape = Instantiate(shapeData.shapePrefab, shapeSpawnPosition.position,spawnRotation);
                 }
                 isStartTimer = false;
             }
@@ -43,7 +46,7 @@ public class ShapeSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "ShapeTracker")
         {
             isStartTimer = true;
 

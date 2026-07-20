@@ -10,6 +10,6 @@ public class ShapeData : MonoBehaviour
 
     void Start()
     {
-        shapePrefab = gameObject;
+        shapePrefab = this.gameObject;
     }
 }
