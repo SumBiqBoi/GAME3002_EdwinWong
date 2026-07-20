@@ -32,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInput();
 
-        Debug.Log(EndCanvas.instance.score);
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("game");
