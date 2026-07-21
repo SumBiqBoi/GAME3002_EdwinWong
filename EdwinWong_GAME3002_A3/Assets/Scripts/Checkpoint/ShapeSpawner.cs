@@ -6,6 +6,8 @@ public class ShapeSpawner : MonoBehaviour
 {
     LinkedList<ShapeData> shapeSpawnList = new LinkedList<ShapeData>();
 
+    ShapeSave shapeSave;
+
     [SerializeField] Transform shapeSpawnPosition;
     [SerializeField] float setSpawnTime;
 
@@ -17,6 +19,8 @@ public class ShapeSpawner : MonoBehaviour
 
     private void Start()
     {
+        shapeSave = FindObjectOfType<ShapeSave>();
+
         spawnRotation = Quaternion.identity;
 
         isStartTimer = false;
@@ -39,9 +43,6 @@ public class ShapeSpawner : MonoBehaviour
                 isStartTimer = false;
             }
         }
-
-        Debug.Log("StartTimer: " + isStartTimer);
-        Debug.Log("Shape timer: " +  timerToSpawnShape);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,17 +51,16 @@ public class ShapeSpawner : MonoBehaviour
         {
             isStartTimer = true;
 
-            ShapeTracker shapeTracker = other.GetComponentInChildren<ShapeTracker>();
-
-            Debug.LogWarning("Collision Name: " + other.name);
-
-            if (shapeTracker != null)
+            if (shapeSave != null)
             {
-                Debug.LogWarning("ShapeTrackerList: " + shapeTracker.shapeList.Count);
-                foreach (ShapeData shapeData in shapeTracker.shapeList)
+                if (shapeSave.shapeSavedList.Count > shapeSpawnList.Count)
                 {
-                    shapeSpawnList.AddLast(shapeData);
-                    Debug.LogWarning("Shapes added to spawner list: " + shapeSpawnList.Count);
+                    shapeSpawnList.Clear();
+
+                    foreach (ShapeData shapeData in shapeSave.shapeSavedList)
+                    {
+                        shapeSpawnList.AddLast(shapeData);
+                    }
                 }
             }
         }
