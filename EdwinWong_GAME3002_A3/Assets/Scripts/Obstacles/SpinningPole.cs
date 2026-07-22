@@ -12,6 +12,8 @@ public class SpinningPole : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float spinSpeed;
 
+    [SerializeField] bool canMove = true;
+
     Vector3 startPosition;
 
     void Start()
@@ -21,7 +23,10 @@ public class SpinningPole : MonoBehaviour
 
     void Update()
     {
-        MovePole();
+        if (canMove)
+        {
+            MovePole();
+        }
 
         SpinPole();
     }
