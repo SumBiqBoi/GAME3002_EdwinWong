@@ -6,13 +6,17 @@ public class ThirdPersonCam : MonoBehaviour
 {
     public Transform orientation;
     public Transform player;
-    public Transform playerObj;
+
     public Rigidbody rb;
 
     public float rotationSpeed;
 
+    public float moveSpeed;
+
     void Start()
     {
+        rb.centerOfMass = new Vector3(0, -0.5f, 0);
+
         if (EndCanvas.instance.isCanvasTrue == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -20,7 +24,7 @@ public class ThirdPersonCam : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Rotate orientation
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
@@ -31,13 +35,16 @@ public class ThirdPersonCam : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         //
         Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
         
         if (inputDir != Vector3.zero)
         {
-            //playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
-            //player.transform.position = new Vector3(inputDir.x, player.position.y, inputDir.z);
-            rb.AddForce(inputDir.normalized, ForceMode.Force);
+            rb.AddForce(inputDir.normalized * moveSpeed, ForceMode.Force);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(rb.centerOfMass, 0.1f);
     }
 }
