@@ -4,13 +4,46 @@ using UnityEngine;
 
 public class ShapeSave : MonoBehaviour
 {
+    [SerializeField] OpenDoor openDoor;
+    
+    [SerializeField] float setSaveTime;
+    
     public LinkedList<ShapeData> shapeSavedList = new LinkedList<ShapeData>();
 
+    ShapeTracker shapeTracker;
+
+
     bool isStartTimer;
-    
+
+    float timerToSpawnShape;
+
     void Start()
     {
         isStartTimer = false;
+
+        timerToSpawnShape = setSaveTime;
+    }
+
+    private void Update()
+    {
+        if (isStartTimer)
+        {
+            timerToSpawnShape -= Time.deltaTime;
+
+            if (timerToSpawnShape < 0)
+            {
+                if (shapeTracker != null)
+                {
+                    foreach (ShapeData shapeData in shapeTracker.shapeList)
+                    {
+                        shapeSavedList.AddLast(shapeData);
+                    }
+
+                    openDoor.OpenDoorAnimation();
+                }
+                isStartTimer = false;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,15 +52,7 @@ public class ShapeSave : MonoBehaviour
         {
             isStartTimer = true;
 
-            ShapeTracker shapeTracker = other.GetComponentInChildren<ShapeTracker>();
-
-            if (shapeTracker != null)
-            {
-                foreach (ShapeData shapeData in shapeTracker.shapeList)
-                {
-                    shapeSavedList.AddLast(shapeData);
-                }
-            }
+            shapeTracker = other.GetComponentInChildren<ShapeTracker>();
         }
     }
 

@@ -6,7 +6,7 @@ public class ShapeSpawner : MonoBehaviour
 {
     LinkedList<ShapeData> shapeSpawnList = new LinkedList<ShapeData>();
 
-    ShapeSave shapeSave;
+    [SerializeField] ShapeSave shapeSave;
 
     [SerializeField] Transform shapeSpawnPosition;
     [SerializeField] float setSpawnTime;
@@ -19,7 +19,7 @@ public class ShapeSpawner : MonoBehaviour
 
     private void Start()
     {
-        shapeSave = FindObjectOfType<ShapeSave>();
+        shapeSave = transform.parent.GetComponentInChildren<ShapeSave>();
 
         spawnRotation = Quaternion.identity;
 

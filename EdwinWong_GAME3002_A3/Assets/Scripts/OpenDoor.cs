@@ -13,6 +13,8 @@ public class OpenDoor : MonoBehaviour
 
     public void OpenDoorAnimation()
     {
+        Debug.Log("Opening Door");
+
         doorAnim.Play("TutorialDoorsOpening");
     }
 }
