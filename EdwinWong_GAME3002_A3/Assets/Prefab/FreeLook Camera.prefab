@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951272313161438252}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13352042, y: -0.6943863, z: 0.13352042, w: 0.6943863}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.18882643, y: 0, z: 0, w: 0.9820105}
+  m_LocalPosition: {x: 0.0000039935126, y: 0, z: 0.000009298325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,7 +89,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1699953501378989734}
   - component: {fileID: 7757956554792562257}
-  - component: {fileID: 4286306317574039637}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -153,7 +152,7 @@ MonoBehaviour:
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4286306317574039637}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ThirdPersonCam, Assembly-CSharp
           m_MethodName: CameraStartPosition
           m_Mode: 1
@@ -232,23 +231,6 @@ MonoBehaviour:
   - {fileID: 8258075310581388987}
   - {fileID: 2692513526393216506}
   - {fileID: 4286812382247437522}
---- !u!114 &4286306317574039637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342702835724245230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a802261484ea514ba1e5c0846b1ba15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 0}
-  player: {fileID: 0}
-  playerObj: {fileID: 0}
-  rb: {fileID: 0}
-  rotationSpeed: 0
 --- !u!1 &1738005139206514923
 GameObject:
   m_ObjectHideFlags: 3
@@ -274,8 +256,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738005139206514923}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10475167, y: -0.69930476, z: 0.10475167, w: 0.69930476}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14814125, y: 0, z: 0, w: 0.9889662}
+  m_LocalPosition: {x: 0.0000039935126, y: 0, z: 0.000009298325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -734,8 +716,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8389191099604548705}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16245987, y: -0.688191, z: 0.16245987, w: 0.688191}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.22975299, y: 0, z: 0, w: 0.973249}
+  m_LocalPosition: {x: 0.0000039935126, y: 0, z: 0.000009298325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

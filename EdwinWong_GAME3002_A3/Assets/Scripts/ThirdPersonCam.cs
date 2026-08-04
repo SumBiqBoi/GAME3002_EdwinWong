@@ -9,19 +9,13 @@ public class ThirdPersonCam : MonoBehaviour
 
     public Rigidbody rb;
 
-    public float rotationSpeed;
-
     public float moveSpeed;
 
     void Start()
     {
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
-        if (EndCanvas.instance.isCanvasTrue == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+
     }
 
     void FixedUpdate()
@@ -29,11 +23,11 @@ public class ThirdPersonCam : MonoBehaviour
         // Rotate orientation
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
-        //
-        //// Rotate player object
+        
+        // Rotate player object
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        //
+        
         Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
         
         if (inputDir != Vector3.zero)

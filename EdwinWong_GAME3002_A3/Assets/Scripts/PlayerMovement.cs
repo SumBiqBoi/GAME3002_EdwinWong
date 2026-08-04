@@ -8,8 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] GameObject com;
-    [SerializeField] GameObject cartBed;
+    [SerializeField] GameObject FreeLookCamera;
     public float moveSpeed;
     public float rotateSpeed;
 
@@ -25,7 +24,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        rb.centerOfMass = com.transform.position;
+        rb.centerOfMass = new Vector3(0, -0.5f, 0);
+
+        if (EndCanvas.instance.isCanvasTrue == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void Update()
@@ -38,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z - rotateSpeed * Time.deltaTime);
+            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y - rotateSpeed * Time.deltaTime, player.transform.eulerAngles.z);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, player.transform.eulerAngles.z + rotateSpeed * Time.deltaTime);
+            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y + rotateSpeed * Time.deltaTime, player.transform.eulerAngles.z);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -53,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //MovePlayer();
+        MovePlayer();
     }
 
     private void PlayerInput()
@@ -64,10 +69,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        // Rotate orientation
+        Vector3 viewDir = player.transform.position - new Vector3(FreeLookCamera.transform.position.x, player.transform.position.y, FreeLookCamera.transform.position.z);
+        orientation.forward = viewDir.normalized;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
+        // Move player object
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        if (inputDir != Vector3.zero)
+        {
+            rb.AddForce(inputDir.normalized * moveSpeed, ForceMode.Force);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
