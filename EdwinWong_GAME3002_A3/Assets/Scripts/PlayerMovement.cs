@@ -79,9 +79,42 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        Vector3 movementForce = inputDir.normalized * moveSpeed;
+
+        float rotX = player.transform.rotation.eulerAngles.x;
+        float rotZ = player.transform.rotation.eulerAngles.z;
+
+        if (rotX >= 180)
+        {
+            rotX -= 360;
+        }
+
+        if (rotZ >= 180)
+        {
+            rotZ -= 360;
+        }
+
+        Vector3 inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
+
         if (inputDir != Vector3.zero)
         {
-            rb.AddForce(inputDir.normalized * moveSpeed, ForceMode.Force);
+            if (inclineRot.x > 10 || inclineRot.z > 10)
+            {
+                if (inclineRot.x > inclineRot.z)
+                {
+                    moveSpeed += (inclineRot.x / 90);
+                }
+                else
+                {
+                    moveSpeed += (inclineRot.z / 90);
+                }
+            }
+
+            rb.AddForce(movementForce, ForceMode.Acceleration);
+        }
+        else
+        {
+            moveSpeed = 20;
         }
     }
 
