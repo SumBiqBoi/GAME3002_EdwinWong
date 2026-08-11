@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject FreeLookCamera;
     public float moveSpeed;
     public float rotateSpeed;
+    float minMoveSpeed;
+    float maxMoveSpeed;
 
     public Transform orientation;
 
@@ -23,13 +25,23 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 checkpointPos;
 
     Vector3 inclineRot;
+    float minClimbAngle;
     float rotX;
     float rotZ;
+    float halfCircleAngle;
+    float fullCircleAngle;
 
     [SerializeField] Rigidbody rb;
 
     void Start()
     {
+        minMoveSpeed = moveSpeed;
+        maxMoveSpeed = 45f;
+
+        minClimbAngle = 10f;
+        halfCircleAngle = 180f;
+        fullCircleAngle = 360f;
+
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
         if (EndCanvas.instance.isCanvasTrue == false)
@@ -69,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputDir != Vector3.zero)
         {
-            if (inclineRot.x > 10 || inclineRot.z > 10)
+            if (inclineRot.x > minClimbAngle || inclineRot.z > minClimbAngle)
             {
                 IncreaseMoveSpeedBasedOnAngle();
             }
@@ -103,24 +115,6 @@ public class PlayerMovement : MonoBehaviour
         movementForce = inputDir.normalized * moveSpeed;
     }
 
-    Vector3 PlayerCartAngleOnIncline(float rotX, float rotZ, Vector3 inclineRot)
-    {
-        rotX = player.transform.rotation.eulerAngles.x;
-        rotZ = player.transform.rotation.eulerAngles.z;
-
-        if (rotX >= 180)
-        {
-            rotX -= 360;
-        }
-
-        if (rotZ >= 180)
-        {
-            rotZ -= 360;
-        }
-
-        return inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
-    }
-
     void IncreaseMoveSpeedBasedOnAngle()
     {
         if (inclineRot.x > inclineRot.z)
@@ -132,19 +126,40 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed += (inclineRot.z / 90);
         }
 
-        moveSpeed = Mathf.Clamp(moveSpeed, 20, 45);
+        moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
     }
 
     void DecreaseMoveSpeed()
     {
-        if (moveSpeed > 20)
+        if (moveSpeed > minMoveSpeed)
         {
             moveSpeed -= 0.3f;
         }
         else
         {
-            moveSpeed = 20;
+            moveSpeed = minMoveSpeed;
         }
+    }
+
+    Vector3 PlayerCartAngleOnIncline(float rotX, float rotZ, Vector3 inclineRot)
+    {
+        rotX = player.transform.rotation.eulerAngles.x;
+        rotZ = player.transform.rotation.eulerAngles.z;
+
+        rotX = FindRotationAngleAxis(rotX);
+        rotZ = FindRotationAngleAxis(rotZ);
+
+        return inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
+    }
+
+    float FindRotationAngleAxis(float axis)
+    {
+        if (axis >= halfCircleAngle)
+        {
+            axis -= fullCircleAngle;
+        }
+
+        return axis;
     }
 
     private void OnTriggerEnter(Collider other)
