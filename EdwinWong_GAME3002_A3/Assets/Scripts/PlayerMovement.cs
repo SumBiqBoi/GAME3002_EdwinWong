@@ -17,8 +17,14 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    Vector3 inputDir;
+    Vector3 movementForce;
     Vector3 moveDirection;
     public Vector3 checkpointPos;
+
+    Vector3 inclineRot;
+    float rotX;
+    float rotZ;
 
     [SerializeField] Rigidbody rb;
 
@@ -59,6 +65,25 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        inclineRot = PlayerCartAngleOnIncline(rotX, rotZ, inclineRot);
+
+        if (inputDir != Vector3.zero)
+        {
+            if (inclineRot.x > 10 || inclineRot.z > 10)
+            {
+                IncreaseMoveSpeedBasedOnAngle();
+            }
+            else
+            {
+                DecreaseMoveSpeed();
+            }
+
+            rb.AddForce(movementForce, ForceMode.Acceleration);
+        }
+        else
+        {
+            DecreaseMoveSpeed();
+        }
     }
 
     private void PlayerInput()
@@ -73,16 +98,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 viewDir = player.transform.position - new Vector3(FreeLookCamera.transform.position.x, player.transform.position.y, FreeLookCamera.transform.position.z);
         orientation.forward = viewDir.normalized;
 
-        // Move player object
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        movementForce = inputDir.normalized * moveSpeed;
+    }
 
-        Vector3 movementForce = inputDir.normalized * moveSpeed;
-
-        float rotX = player.transform.rotation.eulerAngles.x;
-        float rotZ = player.transform.rotation.eulerAngles.z;
+    Vector3 PlayerCartAngleOnIncline(float rotX, float rotZ, Vector3 inclineRot)
+    {
+        rotX = player.transform.rotation.eulerAngles.x;
+        rotZ = player.transform.rotation.eulerAngles.z;
 
         if (rotX >= 180)
         {
@@ -94,45 +118,30 @@ public class PlayerMovement : MonoBehaviour
             rotZ -= 360;
         }
 
-        Vector3 inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
+        return inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
+    }
 
-        if (inputDir != Vector3.zero)
+    void IncreaseMoveSpeedBasedOnAngle()
+    {
+        if (inclineRot.x > inclineRot.z)
         {
-            if (inclineRot.x > 10 || inclineRot.z > 10)
-            {
-                if (inclineRot.x > inclineRot.z)
-                {
-                    moveSpeed += (inclineRot.x / 90);
-                }
-                else
-                {
-                    moveSpeed += (inclineRot.z / 90);
-                }
-            }
-            else
-            {
-                if (moveSpeed > 20)
-                {
-                    moveSpeed -= 0.2f;
-                }
-                else
-                {
-                    moveSpeed = 20;
-                }
-            }
-
-            rb.AddForce(movementForce, ForceMode.Acceleration);
+            moveSpeed += (inclineRot.x / 90);
         }
         else
         {
-            if (moveSpeed > 20)
-            {
-                moveSpeed -= 0.2f;
-            }
-            else
-            {
-                moveSpeed = 20;
-            }
+            moveSpeed += (inclineRot.z / 90);
+        }
+    }
+
+    void DecreaseMoveSpeed()
+    {
+        if (moveSpeed > 20)
+        {
+            moveSpeed -= 0.5f;
+        }
+        else
+        {
+            moveSpeed = 20;
         }
     }
 
