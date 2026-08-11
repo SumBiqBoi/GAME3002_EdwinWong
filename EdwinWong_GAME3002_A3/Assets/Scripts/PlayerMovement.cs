@@ -109,12 +109,30 @@ public class PlayerMovement : MonoBehaviour
                     moveSpeed += (inclineRot.z / 90);
                 }
             }
+            else
+            {
+                if (moveSpeed > 20)
+                {
+                    moveSpeed -= 0.2f;
+                }
+                else
+                {
+                    moveSpeed = 20;
+                }
+            }
 
             rb.AddForce(movementForce, ForceMode.Acceleration);
         }
         else
         {
-            moveSpeed = 20;
+            if (moveSpeed > 20)
+            {
+                moveSpeed -= 0.2f;
+            }
+            else
+            {
+                moveSpeed = 20;
+            }
         }
     }
 
