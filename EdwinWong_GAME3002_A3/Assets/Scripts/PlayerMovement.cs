@@ -131,13 +131,15 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed += (inclineRot.z / 90);
         }
+
+        moveSpeed = Mathf.Clamp(moveSpeed, 20, 45);
     }
 
     void DecreaseMoveSpeed()
     {
         if (moveSpeed > 20)
         {
-            moveSpeed -= 0.5f;
+            moveSpeed -= 0.3f;
         }
         else
         {
