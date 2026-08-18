@@ -15,6 +15,7 @@ TagManager:
   - Capsule
   - Cube
   - ShapeTracker
+  - FloorBreaker
   layers:
   - Default
   - TransparentFX
