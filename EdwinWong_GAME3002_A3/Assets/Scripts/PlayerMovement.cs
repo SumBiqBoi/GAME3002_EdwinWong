@@ -141,6 +141,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SlowMoveSpeed()
+    {
+        minMoveSpeed -= 10;
+        maxMoveSpeed -= 10;
+    }
+
+    public void RestoreMoveSpeed()
+    {
+        minMoveSpeed += 10;
+        maxMoveSpeed += 10;
+    }
+
     Vector3 PlayerCartAngleOnIncline(float rotX, float rotZ, Vector3 inclineRot)
     {
         rotX = player.transform.rotation.eulerAngles.x;
