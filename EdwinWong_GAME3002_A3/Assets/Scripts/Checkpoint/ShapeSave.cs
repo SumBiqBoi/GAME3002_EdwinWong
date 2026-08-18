@@ -26,6 +26,9 @@ public class ShapeSave : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Start timer: " + isStartTimer);
+        Debug.Log("Timer To Spawn Shape = " + timerToSpawnShape);
+
         if (isStartTimer)
         {
             timerToSpawnShape -= Time.deltaTime;
@@ -61,6 +64,8 @@ public class ShapeSave : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isStartTimer = false;
+
+            timerToSpawnShape = setSaveTime;
         }
     }
 }
