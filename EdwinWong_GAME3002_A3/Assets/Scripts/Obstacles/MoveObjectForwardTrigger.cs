@@ -37,8 +37,8 @@ public class MoveObjectForwardTrigger : MonoBehaviour
 
                 if (forwardDistanceFromStart < maxDistance)
                 {
-                    //Vector3 moveForward = go.transform.forward * moveSpeed * Time.deltaTime;
-                    rb.MovePosition(new Vector3(go.transform.position.x + moveSpeed * Time.deltaTime, go.transform.position.y, go.transform.position.z));
+                    Vector3 moveForward = go.transform.forward * moveSpeed * Time.deltaTime;
+                    rb.MovePosition(go.transform.position + moveForward);
                 }
                 else
                 {
