@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MoveObjectForwardTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject[] gameObjects;
+
+    [SerializeField] Transform moveDirection;
+    [SerializeField] GameObject moveObject;
+    [SerializeField] GameObject[] triggers;
 
     Vector3 startPosition;
 
@@ -13,18 +16,19 @@ public class MoveObjectForwardTrigger : MonoBehaviour
     [SerializeField] float maxDistance;
     [SerializeField] float moveSpeed;
 
+    [SerializeField] bool isChain = false;
     bool isMoving;
 
     [SerializeField] float delay = 0;
 
     private void Start()
     {
-        rb = GetComponentInChildren<Rigidbody>();
-
-        foreach (GameObject go in gameObjects)
+        foreach (GameObject trigger in triggers)
         {
-            startPosition = go.transform.position;
+            trigger.SetActive(false);
         }
+
+        rb = moveObject.GetComponent<Rigidbody>();
 
         isMoving = false;
     }
@@ -35,18 +39,23 @@ public class MoveObjectForwardTrigger : MonoBehaviour
         {
             if (delay <= 0)
             {
-                foreach (GameObject go in gameObjects)
-                {
-                    float forwardDistanceFromStart = Vector3.Dot(go.transform.position - startPosition, go.transform.forward);
+                float forwardDistanceFromStart = Vector3.Dot(moveObject.transform.position - startPosition, moveDirection.forward);
 
-                    if (forwardDistanceFromStart < maxDistance)
+                if (forwardDistanceFromStart < maxDistance)
+                {
+                    Vector3 moveForward = moveDirection.forward * moveSpeed * Time.deltaTime;
+                    rb.MovePosition(moveObject.transform.position + moveForward);
+                }
+                else
+                {
+                    isMoving = false;
+                }
+                Debug.Log("is moving: " + isMoving);
+                if (isChain)
+                {
+                    foreach (GameObject trigger in triggers)
                     {
-                        Vector3 moveForward = go.transform.forward * moveSpeed * Time.deltaTime;
-                        rb.MovePosition(go.transform.position + moveForward);
-                    }
-                    else
-                    {
-                        isMoving = false;
+                        trigger.SetActive(true);
                     }
                 }
             }
@@ -54,8 +63,6 @@ public class MoveObjectForwardTrigger : MonoBehaviour
             {
                 delay -= Time.deltaTime;
             }
-
-            Debug.Log("Delay" + delay);
         }
     }
 
@@ -63,7 +70,10 @@ public class MoveObjectForwardTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            startPosition = moveObject.transform.position;
+
             isMoving = true;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }
