@@ -16,13 +16,14 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
+    public Vector3 checkpointPos;
+    Vector3 startingPos;
+
     float horizontalInput;
     float verticalInput;
 
     Vector3 inputDir;
     Vector3 movementForce;
-    Vector3 moveDirection;
-    public Vector3 checkpointPos;
 
     Vector3 inclineRot;
     float minClimbAngle;
@@ -43,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         fullCircleAngle = 360f;
 
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
+
+        startingPos = transform.position;
+        checkpointPos = startingPos;
 
         if (EndCanvas.instance.isCanvasTrue == false)
         {
@@ -69,8 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            player.transform.position = checkpointPos;
-            player.transform.eulerAngles = new Vector3(-90, 0, 0);
+            ResetPlayerToCheckpoint();
         }
     }
 
@@ -174,6 +177,15 @@ public class PlayerMovement : MonoBehaviour
         return axis;
     }
 
+    void ResetPlayerToCheckpoint()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        rb.position = checkpointPos;
+        rb.rotation = Quaternion.identity;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "CheckPoint")
@@ -184,11 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Killbox")
         {
-            player.transform.position = checkpointPos;
-            player.transform.eulerAngles = new Vector3(-90, 0, 0);
-            rb.velocity = Vector3.zero;
-            rb.freezeRotation = true;
-            rb.freezeRotation = false;
+            ResetPlayerToCheckpoint();
         }
 
         if (other.gameObject.tag == "Finish")
