@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,23 +21,12 @@ public class PlayerMovement : MonoBehaviour
     Vector3 inputDir;
     Vector3 movementForce;
 
-    Vector3 inclineRot;
-    float minClimbAngle;
-    float rotX;
-    float rotZ;
-    float halfCircleAngle;
-    float fullCircleAngle;
-
     [SerializeField] Rigidbody rb;
 
     void Start()
     {
         minMoveSpeed = moveSpeed;
         maxMoveSpeed = 45f;
-
-        minClimbAngle = 10f;
-        halfCircleAngle = 180f;
-        fullCircleAngle = 360f;
 
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
@@ -80,25 +65,9 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        inclineRot = PlayerCartAngleOnIncline(rotX, rotZ, inclineRot);
 
-        if (inputDir != Vector3.zero)
-        {
-            if (inclineRot.x > minClimbAngle || inclineRot.z > minClimbAngle)
-            {
-                IncreaseMoveSpeedBasedOnAngle();
-            }
-            else
-            {
-                DecreaseMoveSpeed();
-            }
-
-            rb.AddForce(movementForce, ForceMode.Acceleration);
-        }
-        else
-        {
-            DecreaseMoveSpeed();
-        }
+        rb.AddForce(movementForce, ForceMode.Acceleration);
+        Debug.Log("Velocity: " + rb.velocity.magnitude);
     }
 
     private void PlayerInput()
@@ -109,39 +78,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Rotate orientation
+        // Camera orientation
         Vector3 viewDir = player.transform.position - new Vector3(FreeLookCamera.transform.position.x, player.transform.position.y, FreeLookCamera.transform.position.z);
         orientation.forward = viewDir.normalized;
 
         inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        movementForce = inputDir.normalized * moveSpeed;
+        movementForce = PlayerRotationWithSlope(inputDir) * moveSpeed;
     }
 
-    void IncreaseMoveSpeedBasedOnAngle()
+    private Vector3 PlayerRotationWithSlope(Vector3 inputDir)
     {
-        if (inclineRot.x > inclineRot.z)
-        {
-            moveSpeed += (inclineRot.x / 90);
-        }
-        else
-        {
-            moveSpeed += (inclineRot.z / 90);
-        }
+        Vector3 groundNormal = player.transform.up;
 
-        moveSpeed = Mathf.Clamp(moveSpeed, minMoveSpeed, maxMoveSpeed);
-    }
+        Vector3 slopeDir = Vector3.ProjectOnPlane(inputDir, groundNormal).normalized;
 
-    void DecreaseMoveSpeed()
-    {
-        if (moveSpeed > minMoveSpeed)
-        {
-            moveSpeed -= 0.3f;
-        }
-        else
-        {
-            moveSpeed = minMoveSpeed;
-        }
+        return slopeDir;
     }
 
     public void SlowMoveSpeed()
@@ -154,27 +106,6 @@ public class PlayerMovement : MonoBehaviour
     {
         minMoveSpeed += 10;
         maxMoveSpeed += 10;
-    }
-
-    Vector3 PlayerCartAngleOnIncline(float rotX, float rotZ, Vector3 inclineRot)
-    {
-        rotX = player.transform.rotation.eulerAngles.x;
-        rotZ = player.transform.rotation.eulerAngles.z;
-
-        rotX = FindRotationAngleAxis(rotX);
-        rotZ = FindRotationAngleAxis(rotZ);
-
-        return inclineRot = new Vector3(Mathf.Abs(rotX), 0, Mathf.Abs(rotZ));
-    }
-
-    float FindRotationAngleAxis(float axis)
-    {
-        if (axis >= halfCircleAngle)
-        {
-            axis -= fullCircleAngle;
-        }
-
-        return axis;
     }
 
     void ResetPlayerToCheckpoint()
