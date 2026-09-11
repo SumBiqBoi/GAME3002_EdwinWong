@@ -48,14 +48,6 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("game");
         }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y - rotateSpeed * Time.deltaTime, player.transform.eulerAngles.z);
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            player.transform.eulerAngles = new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y + rotateSpeed * Time.deltaTime, player.transform.eulerAngles.z);
-        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             ResetPlayerToCheckpoint();
@@ -65,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        RotatePlayer();
 
         rb.AddForce(movementForce, ForceMode.Acceleration);
         Debug.Log("Velocity: " + rb.velocity.magnitude);
@@ -94,6 +87,30 @@ public class PlayerMovement : MonoBehaviour
         Vector3 slopeDir = Vector3.ProjectOnPlane(inputDir, groundNormal).normalized;
 
         return slopeDir;
+    }
+
+    private void RotatePlayer()
+    {
+        float rotationInput = 0f;
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rotationInput = -1f;
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            rotationInput = 1f;
+        }
+
+        if (rotationInput != 0f)
+        {
+            float rotationAmount = rotationInput * rotateSpeed * Time.fixedDeltaTime;
+
+            Quaternion rotation = rb.rotation * Quaternion.Euler(0f, rotationAmount, 0f);
+
+            rb.MoveRotation(rotation);
+        }
     }
 
     public void SlowMoveSpeed()
