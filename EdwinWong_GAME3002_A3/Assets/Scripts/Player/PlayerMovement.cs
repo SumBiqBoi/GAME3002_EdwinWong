@@ -12,9 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
-    public Vector3 checkpointPos;
-    Vector3 startingPos;
-
     float horizontalInput;
     float verticalInput;
 
@@ -22,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movementForce;
 
     [SerializeField] Rigidbody rb;
+    PlayerTriggerCollision playerTriggerCollision;
 
     void Start()
     {
@@ -30,8 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
-        startingPos = transform.position;
-        checkpointPos = startingPos;
+        playerTriggerCollision = GetComponentInChildren<PlayerTriggerCollision>();
 
         if (EndCanvas.instance.isCanvasTrue == false)
         {
@@ -50,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            ResetPlayerToCheckpoint();
+            playerTriggerCollision.ResetPlayerToCheckpoint();
         }
     }
 
@@ -60,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         RotatePlayer();
 
         rb.AddForce(movementForce, ForceMode.Acceleration);
-        Debug.Log("Velocity: " + rb.velocity.magnitude);
+        //Debug.Log("Velocity: " + rb.velocity.magnitude);
     }
 
     private void PlayerInput()
@@ -123,37 +120,5 @@ public class PlayerMovement : MonoBehaviour
     {
         minMoveSpeed += 10;
         maxMoveSpeed += 10;
-    }
-
-    void ResetPlayerToCheckpoint()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        rb.position = checkpointPos;
-        rb.rotation = Quaternion.identity;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "CheckPoint")
-        {
-            Checkpoint checkpoint = other.GetComponent<Checkpoint>();
-            checkpointPos = checkpoint.spawnLocation.transform.position;
-        }
-
-        if (other.gameObject.tag == "Killbox")
-        {
-            ResetPlayerToCheckpoint();
-        }
-
-        if (other.gameObject.tag == "Finish")
-        {
-            Time.timeScale = 0f;
-            EndCanvas.instance.endCanvas.SetActive(true);
-            EndCanvas.instance.isCanvasTrue = true;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
     }
 }
