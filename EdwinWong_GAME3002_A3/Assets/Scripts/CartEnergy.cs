@@ -12,8 +12,6 @@ public class CartEnergy : MonoBehaviour
     void Start()
     {
         isEnergyDepleting = false;
-
-        currentEnergy = maxEnergy;
     }
 
     void Update()
@@ -25,7 +23,12 @@ public class CartEnergy : MonoBehaviour
             if (currentEnergy <= 0)
             {
                 // End game;
+                Debug.LogWarning("Game Ended");
+
+                isEnergyDepleting = false;
             }
+
+            Debug.Log("Energy: " +  currentEnergy);
         }
     }
 
@@ -33,7 +36,15 @@ public class CartEnergy : MonoBehaviour
     {
         if (other.tag == "Energy")
         {
-            isEnergyDepleting = !isEnergyDepleting;
+            isEnergyDepleting = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Energy")
+        {
+            isEnergyDepleting = true;
         }
     }
 }

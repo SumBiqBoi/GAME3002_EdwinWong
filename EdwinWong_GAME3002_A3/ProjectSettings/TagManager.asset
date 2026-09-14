@@ -16,6 +16,7 @@ TagManager:
   - Cube
   - ShapeTracker
   - FloorBreaker
+  - Energy
   layers:
   - Default
   - TransparentFX
