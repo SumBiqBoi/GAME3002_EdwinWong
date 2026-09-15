@@ -8,6 +8,7 @@ public class BootStrapper : MonoBehaviour
     public GameObject menuScreen;
     public GameObject shopScreen;
     public GameObject gameScreen;
+    public GameObject optionScreen;
     public GameObject endScreen;
 
     void Start()
@@ -16,6 +17,7 @@ public class BootStrapper : MonoBehaviour
         menuScreen.SetActive(false);
         shopScreen.SetActive(false);
         gameScreen.SetActive(false);
+        optionScreen.SetActive(false);
         endScreen.SetActive(false);
 
         GameStateManager.Initialize(this);

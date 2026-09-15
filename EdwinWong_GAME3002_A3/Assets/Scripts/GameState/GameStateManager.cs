@@ -6,10 +6,11 @@ static public class GameStateManager
 {
     static Stack<AbstractGameState> gameStateStack;
 
-    static public TitleState titleState;
-    static public MenuState  menuState;
-    static public ShopState  shopState;
-    static public GameState  gameState;
+    static public TitleState  titleState;
+    static public MenuState   menuState;
+    static public ShopState   shopState;
+    static public GameState   gameState;
+    static public OptionState optionState;
 
     static public void Initialize(BootStrapper bootStrapper)
     {
@@ -19,6 +20,7 @@ static public class GameStateManager
         menuState = new MenuState(bootStrapper.menuScreen);
         shopState = new ShopState(bootStrapper.shopScreen);
         gameState = new GameState(bootStrapper.gameScreen);
+        optionState = new OptionState(bootStrapper.optionScreen);
 
         PushGameStateOnStack(titleState);
     }
