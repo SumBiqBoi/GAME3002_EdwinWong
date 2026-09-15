@@ -34,7 +34,10 @@ public class MenuState : AbstractGameState
             }
         }
 
-        newGameButton.onClick.AddListener(NewGameStartClick);
+        newGameButton.onClick.AddListener(NewGameClick);
+        continueButton.onClick.AddListener(ContinueClick);
+        optionsButton.onClick.AddListener(OptionsClick);
+        quitButton.onClick.AddListener(QuitClick);
     }
 
     public override void LoadGameState()
@@ -62,8 +65,23 @@ public class MenuState : AbstractGameState
         
     }
 
-    public void NewGameStartClick()
+    public void NewGameClick()
     {
         GameStateManager.PushGameStateOnStack(GameStateManager.shopState);
+    }
+
+    public void ContinueClick()
+    {
+        GameStateManager.PushGameStateOnStack(GameStateManager.shopState);
+    }
+
+    public void OptionsClick()
+    {
+
+    }
+
+    public void QuitClick()
+    {
+        Application.Quit();
     }
 }
