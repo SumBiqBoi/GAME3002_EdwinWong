@@ -12,7 +12,7 @@ public class Upgrades
 
     public float containerStrength;
 
-    private void Init()
+    public void Init()
     {
         currentEnergy = 0;
         maxEnergy = 0;
