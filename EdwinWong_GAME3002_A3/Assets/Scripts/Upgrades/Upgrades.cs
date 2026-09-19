@@ -14,13 +14,13 @@ public class Upgrades
 
     public void Init()
     {
-        currentEnergy = 0;
-        maxEnergy = 0;
-        coinsHeld = 0;
-        mass = 0;
-        acceleration = 0;
-        maxSpeed = 0; 
-        rotateSpeed = 0;
+        currentEnergy = 10;
+        maxEnergy = 100;
+        coinsHeld = 25;
+        mass = 1;
+        acceleration = 20;
+        maxSpeed = 4; 
+        rotateSpeed = 150;
         containerStrength = 0;
     }
 
