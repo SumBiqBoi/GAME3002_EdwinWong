@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
 {
-    public Upgrades upgrades;
     MenuPopUp menuPopUp;
 
     Button currentEnergyButton;
@@ -21,8 +20,18 @@ public class UpgradeShop : MonoBehaviour
     {
         InitializeUpgradeShop();
 
-        upgrades = new Upgrades();
-        upgrades.Init();
+        ContentLoader.UpgradesStats();
+
+        Debug.Log(ContentLoader.UpgradesStats().currentEnergy);
+        ContentLoader.UpgradesStats().AddCurrentEnergy(30);
+        Debug.Log(ContentLoader.UpgradesStats().currentEnergy);
+        Debug.Log(ContentLoader.UpgradesStats().maxEnergy);
+        Debug.Log(ContentLoader.UpgradesStats().coinsHeld);
+        Debug.Log(ContentLoader.UpgradesStats().mass);
+        Debug.Log(ContentLoader.UpgradesStats().acceleration);
+        Debug.Log(ContentLoader.UpgradesStats().maxSpeed);
+        Debug.Log(ContentLoader.UpgradesStats().rotateSpeed);
+        Debug.Log(ContentLoader.UpgradesStats().containerStrength);
     }
 
     void InitializeUpgradeShop()
@@ -79,48 +88,48 @@ public class UpgradeShop : MonoBehaviour
     public void EnergyUpgradeClick()
     {
         menuPopUp.MovePopUp(currentEnergyButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.CurrentEnergy, upgrades);
+        menuPopUp.InitializePopUp(ItemType.CurrentEnergy);
     }
 
     public void MaxEnergyUpgradeClick()
     {
         menuPopUp.MovePopUp(maxEnergyButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.MaxEnergy, upgrades);
+        menuPopUp.InitializePopUp(ItemType.MaxEnergy);
     }
 
     public void IncomeUpgradeClick()
     {
         menuPopUp.MovePopUp(incomeButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.Income, upgrades);
+        menuPopUp.InitializePopUp(ItemType.Income);
     }
 
     public void MassUpgradeClick()
     {
         menuPopUp.MovePopUp(massButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.MassIncrease, upgrades);
+        menuPopUp.InitializePopUp(ItemType.MassIncrease);
     }
 
     public void AccelerationUpgradeClick()
     {
         menuPopUp.MovePopUp(accelerationButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.Acceleration, upgrades);
+        menuPopUp.InitializePopUp(ItemType.Acceleration);
     }
 
     public void MaxSpeedUpgradeClick()
     {
         menuPopUp.MovePopUp(maxSpeedButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.MaxSpeed, upgrades);
+        menuPopUp.InitializePopUp(ItemType.MaxSpeed);
     }
 
     public void RotateSpeedUpgradeClick()
     {
         menuPopUp.MovePopUp(rotateSpeedButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.RotateSpeed, upgrades);
+        menuPopUp.InitializePopUp(ItemType.RotateSpeed);
     }
 
     public void ContainerStrengthUpgradeClick()
     {
         menuPopUp.MovePopUp(containerStrengthButton.gameObject);
-        menuPopUp.InitializePopUp(ItemType.ContainerStrength, upgrades);
+        menuPopUp.InitializePopUp(ItemType.ContainerStrength);
     }
 }

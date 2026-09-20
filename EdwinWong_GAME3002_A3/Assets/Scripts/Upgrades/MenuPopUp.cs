@@ -39,9 +39,9 @@ public class MenuPopUp : MonoBehaviour
         }
     }
 
-    public void InitializePopUp(ItemType itemType, Upgrades upgrades)
+    public void InitializePopUp(ItemType itemType)
     {
-        UpgradeItemData upgradeItemData = ContentLoader.LoadUpgradeItem(itemType, upgrades);
+        UpgradeItemData upgradeItemData = ContentLoader.LoadUpgradeItem(itemType);
 
         itemName.text = upgradeItemData.itemName;
         itemDesc.text = upgradeItemData.itemDesc;

@@ -17,7 +17,13 @@ public enum ItemType
 
 public static class ContentLoader
 {
-    public static UpgradeItemData LoadUpgradeItem(ItemType type, Upgrades upgrades)
+    private static Upgrades upgrades = new Upgrades(10, 100, 25, 1, 20, 4, 150, 0);
+    public static Upgrades UpgradesStats()
+    {
+        return upgrades;
+    }
+
+    public static UpgradeItemData LoadUpgradeItem(ItemType type)
     {
         UpgradeItemData upgradeItemData;
 
@@ -34,8 +40,8 @@ public static class ContentLoader
 
             itemName = "Current Energy";
             itemDesc = "Increases current energy by " + addedStat;
-            currentStat = upgrades.GetCurrentEnergy().ToString();
-            upgradedStat = (addedStat + upgrades.GetCurrentEnergy()).ToString();
+            currentStat = upgrades.currentEnergy.ToString();
+            upgradedStat = (addedStat + upgrades.currentEnergy).ToString();
         }
         else if (type == ItemType.MaxEnergy)
         {
@@ -43,8 +49,8 @@ public static class ContentLoader
 
             itemName = "Max Energy";
             itemDesc = "Increases maximum energy by " + addedStat;
-            currentStat = upgrades.GetMaxEnergy().ToString();
-            upgradedStat = (addedStat + upgrades.GetMaxEnergy()).ToString();
+            currentStat = upgrades.maxEnergy.ToString();
+            upgradedStat = (addedStat + upgrades.maxEnergy).ToString();
         }
         else if (type == ItemType.Income)
         {
@@ -52,8 +58,8 @@ public static class ContentLoader
 
             itemName = "Income";
             itemDesc = "Increases earnings from all sources by " + addedStat;
-            currentStat = upgrades.GetCoinsHeld().ToString();
-            upgradedStat = (addedStat + upgrades.GetCoinsHeld()).ToString();
+            currentStat = upgrades.coinsHeld.ToString();
+            upgradedStat = (addedStat + upgrades.coinsHeld).ToString();
         }
         else if (type == ItemType.MassIncrease)
         {
@@ -61,8 +67,8 @@ public static class ContentLoader
 
             itemName = "Mass Increase";
             itemDesc = "Increases the mass / weight of the cart by " + addedStat;
-            currentStat = upgrades.GetMass().ToString();
-            upgradedStat = (addedStat + upgrades.GetMass()).ToString();
+            currentStat = upgrades.mass.ToString();
+            upgradedStat = (addedStat + upgrades.mass).ToString();
         }
         else if (type == ItemType.Acceleration)
         {
@@ -70,8 +76,8 @@ public static class ContentLoader
 
             itemName = "Acceleration";
             itemDesc = "Increases acceleration of the cart by " + addedStat;
-            currentStat = upgrades.GetAcceleration().ToString();
-            upgradedStat = (addedStat + upgrades.GetAcceleration()).ToString();
+            currentStat = upgrades.acceleration.ToString();
+            upgradedStat = (addedStat + upgrades.acceleration).ToString();
         }
         else if (type == ItemType.MaxSpeed)
         {
@@ -79,8 +85,8 @@ public static class ContentLoader
 
             itemName = "Max Speed";
             itemDesc = "Increases the max speed of the cart by " + addedStat;
-            currentStat = upgrades.GetMaxSpeed().ToString();
-            upgradedStat = (addedStat + upgrades.GetMaxSpeed()).ToString();
+            currentStat = upgrades.maxSpeed.ToString();
+            upgradedStat = (addedStat + upgrades.maxSpeed).ToString();
         }
         else if (type == ItemType.RotateSpeed)
         {
@@ -88,8 +94,8 @@ public static class ContentLoader
 
             itemName = "Rotate Speed";
             itemDesc = "Increase the rotational speed of the cart by " + addedStat;
-            currentStat = upgrades.GetRotateSpeed().ToString();
-            upgradedStat = (addedStat + upgrades.GetRotateSpeed()).ToString();
+            currentStat = upgrades.rotateSpeed.ToString();
+            upgradedStat = (addedStat + upgrades.rotateSpeed).ToString();
         }
         else if (type == ItemType.ContainerStrength)
         {
@@ -97,8 +103,8 @@ public static class ContentLoader
 
             itemName = "ContainerStrength";
             itemDesc = "Increases the amount of hits the container by " + addedStat;
-            currentStat = upgrades.GetContainerStrength().ToString();
-            upgradedStat = (addedStat + upgrades.GetContainerStrength()).ToString();
+            currentStat = upgrades.containerStrength.ToString();
+            upgradedStat = (addedStat + upgrades.containerStrength).ToString();
         }
 
         upgradeItemData = new UpgradeItemData(itemName, itemDesc, currentStat, upgradedStat);
