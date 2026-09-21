@@ -5,8 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject FreeLookCamera;
-    public float moveSpeed;
-    public float rotateSpeed;
+    float moveSpeed;
+    float rotateSpeed;
     float minMoveSpeed;
     float maxMoveSpeed;
 
@@ -23,6 +23,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        moveSpeed = ContentLoader.UpgradesStats().acceleration;
+        rotateSpeed = ContentLoader.UpgradesStats().rotateSpeed;
+
+        rb.mass = ContentLoader.UpgradesStats().mass;
+
         minMoveSpeed = moveSpeed;
         maxMoveSpeed = 45f;
 
@@ -35,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-    }
+    } 
 
     void Update()
     {
@@ -49,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerTriggerCollision.ResetPlayerToCheckpoint();
         }
+
+        Debug.Log("Velocity: " + rb.velocity.magnitude);
     }
 
     private void FixedUpdate()

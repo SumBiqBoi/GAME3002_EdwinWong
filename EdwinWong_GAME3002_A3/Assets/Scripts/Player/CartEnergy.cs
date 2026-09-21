@@ -11,6 +11,9 @@ public class CartEnergy : MonoBehaviour
 
     void Start()
     {
+        currentEnergy = ContentLoader.UpgradesStats().currentEnergy;
+        maxEnergy = ContentLoader.UpgradesStats().maxEnergy;
+
         isEnergyDepleting = false;
     }
 
