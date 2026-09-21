@@ -21,17 +21,6 @@ public class UpgradeShop : MonoBehaviour
         InitializeUpgradeShop();
 
         ContentLoader.UpgradesStats();
-
-        Debug.Log(ContentLoader.UpgradesStats().currentEnergy);
-        ContentLoader.UpgradesStats().AddCurrentEnergy(30);
-        Debug.Log(ContentLoader.UpgradesStats().currentEnergy);
-        Debug.Log(ContentLoader.UpgradesStats().maxEnergy);
-        Debug.Log(ContentLoader.UpgradesStats().coinsHeld);
-        Debug.Log(ContentLoader.UpgradesStats().mass);
-        Debug.Log(ContentLoader.UpgradesStats().acceleration);
-        Debug.Log(ContentLoader.UpgradesStats().maxSpeed);
-        Debug.Log(ContentLoader.UpgradesStats().rotateSpeed);
-        Debug.Log(ContentLoader.UpgradesStats().containerStrength);
     }
 
     void InitializeUpgradeShop()
