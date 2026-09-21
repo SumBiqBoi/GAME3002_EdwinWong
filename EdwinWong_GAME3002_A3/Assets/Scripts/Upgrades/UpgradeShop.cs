@@ -58,8 +58,8 @@ public class UpgradeShop : MonoBehaviour
             }
             else if (child.name == "MaxSpeedButton")
             {
-                maxEnergyButton = child.gameObject.GetComponent<Button>();
-                maxEnergyButton.onClick.AddListener(MaxEnergyUpgradeClick);
+                maxSpeedButton = child.gameObject.GetComponent<Button>();
+                maxSpeedButton.onClick.AddListener(MaxSpeedUpgradeClick);
             }
             else if (child.name == "RotateSpeedButton")
             {
