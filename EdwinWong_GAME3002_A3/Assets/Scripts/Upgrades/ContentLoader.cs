@@ -17,7 +17,16 @@ public enum ItemType
 
 public static class ContentLoader
 {
-    private static Upgrades upgrades = new Upgrades(10, 100, 25, 1, 20, 4, 150, 0);
+    private static Upgrades upgrades = new Upgrades(
+        10,     // Current energy
+        100,    // Max energy
+        25,     // Coins held
+        1,      // Mass
+        20,     // Acceleration
+        4,      // Max speed
+        150,    // Rotate speed
+        0       // Container strength
+        );
     public static Upgrades UpgradesStats()
     {
         return upgrades;
