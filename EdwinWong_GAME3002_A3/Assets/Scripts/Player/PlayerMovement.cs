@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject FreeLookCamera;
     float moveSpeed;
     float rotateSpeed;
-    float minMoveSpeed;
-    float maxMoveSpeed;
+
+    float slowSpeed;
 
     public Transform orientation;
 
@@ -26,10 +26,9 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = ContentLoader.UpgradesStats().acceleration;
         rotateSpeed = ContentLoader.UpgradesStats().rotateSpeed;
 
-        rb.mass = ContentLoader.UpgradesStats().mass;
+        slowSpeed = ContentLoader.UpgradesStats().acceleration - 5; // 15
 
-        minMoveSpeed = moveSpeed;
-        maxMoveSpeed = 45f;
+        rb.mass = ContentLoader.UpgradesStats().mass;
 
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
 
@@ -119,13 +118,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void SlowMoveSpeed()
     {
-        minMoveSpeed -= 10;
-        maxMoveSpeed -= 10;
+        ContentLoader.UpgradesStats().SubtractAcceleration(slowSpeed);
     }
 
     public void RestoreMoveSpeed()
     {
-        minMoveSpeed += 10;
-        maxMoveSpeed += 10;
+        ContentLoader.UpgradesStats().AddAcceleration(slowSpeed);
     }
 }

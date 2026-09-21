@@ -69,6 +69,11 @@ public class Upgrades
         acceleration += value;
     }
 
+    public void SubtractAcceleration(float value)
+    {
+        acceleration -= value;
+    }
+
     public void AddMaxSpeed(float value)
     {
         maxSpeed += value;

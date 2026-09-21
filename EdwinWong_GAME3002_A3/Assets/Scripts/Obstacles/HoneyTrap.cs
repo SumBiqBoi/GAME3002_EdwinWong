@@ -11,7 +11,6 @@ public class HoneyTrap : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerMovement>().SlowMoveSpeed();
-            other.GetComponent<PlayerMovement>().moveSpeed -= 10;
             other.GetComponent<Rigidbody>().velocity /= 2;
         }
     }
