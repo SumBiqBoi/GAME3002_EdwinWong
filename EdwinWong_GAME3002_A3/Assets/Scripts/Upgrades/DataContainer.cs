@@ -8,13 +8,15 @@ public class UpgradeItemData
     public string itemDesc;
     public string currentStat;
     public string upgradedStat;
+    public int addedStat;
 
-    public UpgradeItemData(string itemName, string itemDesc, string currentStat, string upgradedStat)
+    public UpgradeItemData(string itemName, string itemDesc, string currentStat, string upgradedStat, int addedStat)
     {
         this.itemName = itemName;
         this.itemDesc = itemDesc;
         this.currentStat = currentStat;
         this.upgradedStat = upgradedStat;
+        this.addedStat = addedStat;
     }
 }
 
@@ -46,7 +48,9 @@ public class Upgrades
 
     public void AddCurrentEnergy(float value)
     {
+        Debug.Log(currentEnergy);
         currentEnergy += value;
+        Debug.Log(currentEnergy);
     }
 
     public void AddMaxEnergy(float value)

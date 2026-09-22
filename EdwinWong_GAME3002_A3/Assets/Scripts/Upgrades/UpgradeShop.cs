@@ -77,6 +77,7 @@ public class UpgradeShop : MonoBehaviour
     public void EnergyUpgradeClick()
     {
         menuPopUp.InitializePopUp(ItemType.CurrentEnergy);
+        menuPopUp.upgradeCounter = ItemType.CurrentEnergy;
     }
 
     public void MaxEnergyUpgradeClick()

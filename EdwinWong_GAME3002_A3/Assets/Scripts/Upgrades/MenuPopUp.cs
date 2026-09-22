@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MenuPopUp : MonoBehaviour
 {
+    UpgradeItemData upgradeItemData;
+
     GameObject menuPopUp;
 
     TMP_Text itemName;
@@ -17,6 +19,8 @@ public class MenuPopUp : MonoBehaviour
     Button backOutButton;
     public Button buyButton;
     public Button sellButton;
+
+    public ItemType upgradeCounter;
 
     void Start()
     {
@@ -46,6 +50,11 @@ public class MenuPopUp : MonoBehaviour
             {
                 upgradedStat = child.gameObject.GetComponent<TMP_Text>();
             }
+            else if (child.name == "BuyButton")
+            {
+                buyButton = child.gameObject.GetComponent<Button>();
+                buyButton.onClick.AddListener(BuyClick);
+            }
             else if (child.name == "BackOutButton")
             {
                 backOutButton = child.gameObject.GetComponent<Button>();
@@ -58,7 +67,7 @@ public class MenuPopUp : MonoBehaviour
 
     public void InitializePopUp(ItemType itemType)
     {
-        UpgradeItemData upgradeItemData = ContentLoader.LoadUpgradeItem(itemType);
+        upgradeItemData = ContentLoader.LoadUpgradeItem(itemType);
 
         itemName.text = upgradeItemData.itemName;
         itemDesc.text = upgradeItemData.itemDesc;
@@ -83,8 +92,41 @@ public class MenuPopUp : MonoBehaviour
         menuPopUp.SetActive(false);
     }
 
-    public void Buy()
+    public void BuyClick()
     {
+        if (upgradeCounter == ItemType.CurrentEnergy)
+        {
+            ContentLoader.UpgradesStats().AddCurrentEnergy(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.MaxEnergy)
+        {
+            ContentLoader.UpgradesStats().AddMaxEnergy(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.Income)
+        {
+            ContentLoader.UpgradesStats().AddCoinsHeld(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.MassIncrease)
+        {
+            ContentLoader.UpgradesStats().AddMass(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.Acceleration)
+        {
+            ContentLoader.UpgradesStats().AddAcceleration(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.MaxSpeed)
+        {
+            ContentLoader.UpgradesStats().AddMaxSpeed(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.RotateSpeed)
+        {
+            ContentLoader.UpgradesStats().AddRotateSpeed(upgradeItemData.addedStat);
+        }
+        else if (upgradeCounter == ItemType.ContainerStrength)
+        {
+            ContentLoader.UpgradesStats().AddContainerStrength(upgradeItemData.addedStat);
+        }
 
+        InitializePopUp(upgradeCounter);
     }
 }

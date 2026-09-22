@@ -27,6 +27,7 @@ public static class ContentLoader
         150,    // Rotate speed
         0       // Container strength
         );
+
     public static Upgrades UpgradesStats()
     {
         return upgrades;
@@ -41,7 +42,7 @@ public static class ContentLoader
         string currentStat = "";
         string upgradedStat = "";
 
-        float addedStat = 0;
+        int addedStat = 0;
 
         if (type == ItemType.CurrentEnergy)
         {
@@ -116,7 +117,7 @@ public static class ContentLoader
             upgradedStat = (addedStat + upgrades.containerStrength).ToString();
         }
 
-        upgradeItemData = new UpgradeItemData(itemName, itemDesc, currentStat, upgradedStat);
+        upgradeItemData = new UpgradeItemData(itemName, itemDesc, currentStat, upgradedStat, addedStat);
         return upgradeItemData;
     }
 }
