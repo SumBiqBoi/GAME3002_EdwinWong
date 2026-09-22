@@ -6,19 +6,29 @@ using UnityEngine.UI;
 
 public class MenuPopUp : MonoBehaviour
 {
+    GameObject menuPopUp;
+
     TMP_Text itemName;
     TMP_Text itemDesc;
 
     TMP_Text currentStat;
     TMP_Text upgradedStat;
 
+    Button backOutButton;
     public Button buyButton;
     public Button sellButton;
 
     void Start()
     {
-
         foreach (Transform child in transform)
+        {
+            if (child.name == "Menu")
+            {
+                menuPopUp = child.gameObject;
+            }
+        }
+
+        foreach (Transform child in menuPopUp.transform)
         {
             if (child.name == "ItemName")
             {
@@ -36,7 +46,14 @@ public class MenuPopUp : MonoBehaviour
             {
                 upgradedStat = child.gameObject.GetComponent<TMP_Text>();
             }
+            else if (child.name == "BackOutButton")
+            {
+                backOutButton = child.gameObject.GetComponent<Button>();
+                backOutButton.onClick.AddListener(BackOutClick);
+            }
         }
+
+        DisablePopUp();
     }
 
     public void InitializePopUp(ItemType itemType)
@@ -51,21 +68,19 @@ public class MenuPopUp : MonoBehaviour
         EnablePopUp();
     }
 
-    public void MovePopUp(GameObject moveToGameObject)
+    public void BackOutClick()
     {
         DisablePopUp();
-
-        gameObject.transform.position = moveToGameObject.transform.position;
     }
 
     public void EnablePopUp()
     {
-        gameObject.SetActive(true);
+        menuPopUp.SetActive(true);
     }
 
     public void DisablePopUp()
     {
-        gameObject.SetActive(false);
+        menuPopUp.SetActive(false);
     }
 
     public void Buy()
