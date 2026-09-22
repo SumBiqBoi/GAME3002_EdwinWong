@@ -48,9 +48,7 @@ public class Upgrades
 
     public void AddCurrentEnergy(float value)
     {
-        Debug.Log(currentEnergy);
         currentEnergy += value;
-        Debug.Log(currentEnergy);
     }
 
     public void AddMaxEnergy(float value)
