@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
 {
     MenuPopUp menuPopUp;
+
+    TMP_Text coinsHeldText;
 
     Button currentEnergyButton;
     Button maxEnergyButton;
@@ -19,6 +22,7 @@ public class UpgradeShop : MonoBehaviour
     void Start()
     {
         InitializeUpgradeShop();
+        CoinsHeldTextUpdate();
 
         ContentLoader.UpgradesStats();
     }
@@ -30,6 +34,10 @@ public class UpgradeShop : MonoBehaviour
             if (child.name == "MenuPopUp")
             {
                 menuPopUp = child.gameObject.GetComponent<MenuPopUp>();
+            }
+            else if (child.name == "CoinsHeld")
+            {
+                coinsHeldText = child.gameObject.GetComponent<TMP_Text>();
             }
             else if (child.name == "CurrentEnergyButton")
             {
@@ -72,6 +80,11 @@ public class UpgradeShop : MonoBehaviour
                 containerStrengthButton.onClick.AddListener(ContainerStrengthUpgradeClick);
             }
         }
+    }
+
+    public void CoinsHeldTextUpdate()
+    {
+        coinsHeldText.text = ContentLoader.UpgradesStats().coinsHeld.ToString();
     }
 
     public void EnergyUpgradeClick()

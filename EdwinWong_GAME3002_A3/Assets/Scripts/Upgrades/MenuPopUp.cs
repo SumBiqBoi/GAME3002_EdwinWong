@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuPopUp : MonoBehaviour
 {
+    UpgradeShop upgradeShop;
     UpgradeItemData upgradeItemData;
 
     GameObject menuPopUp;
@@ -24,6 +25,7 @@ public class MenuPopUp : MonoBehaviour
 
     void Start()
     {
+        upgradeShop = GetComponentInParent<UpgradeShop>();
         foreach (Transform child in transform)
         {
             if (child.name == "Menu")
@@ -73,6 +75,8 @@ public class MenuPopUp : MonoBehaviour
         itemDesc.text = upgradeItemData.itemDesc;
         currentStat.text = upgradeItemData.currentStat;
         upgradedStat.text = upgradeItemData.upgradedStat;
+
+        upgradeCounter = itemType;
 
         EnablePopUp();
     }
@@ -128,5 +132,6 @@ public class MenuPopUp : MonoBehaviour
         }
 
         InitializePopUp(upgradeCounter);
+        upgradeShop.CoinsHeldTextUpdate();
     }
 }
