@@ -42,8 +42,6 @@ public class PlayerTriggerCollision : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             Time.timeScale = 0f;
-            EndCanvas.instance.endCanvas.SetActive(true);
-            EndCanvas.instance.isCanvasTrue = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

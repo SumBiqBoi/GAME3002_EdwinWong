@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class EndCanvas : MonoBehaviour
 {
-    public static EndCanvas instance;
+    //public static EndCanvas instance;
 
-    [SerializeField] Timer timerScript;
-    [SerializeField] public GameObject endCanvas;
+    //[SerializeField] Timer timerScript;
+    //[SerializeField] public GameObject endCanvas;
     [SerializeField] Button restartButton;
     [SerializeField] Button mainMenuButton;
     [SerializeField] TMP_Text scoreText;
@@ -24,28 +24,28 @@ public class EndCanvas : MonoBehaviour
 
     public bool isCanvasTrue;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(instance);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null && instance != this)
+    //    {
+    //        Destroy(instance);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //    }
+    //}
 
     private void Start()
     {
-        timerScript = FindFirstObjectByType<Timer>();
-        endCanvas.SetActive(false);
+        //timerScript = FindFirstObjectByType<Timer>();
+        //endCanvas.SetActive(false);
         isCanvasTrue = false;
     }
 
     private void Update()
     {
-        score = (multiplierValue / timerScript.elapsedTime) * 100000;
+        //score = (multiplierValue / timerScript.elapsedTime) * 100000;
 
         scoreText.text = score.ToString("F0");
 
@@ -54,7 +54,7 @@ public class EndCanvas : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("game");
-        endCanvas.SetActive(false);
+        //endCanvas.SetActive(false);
         isCanvasTrue = false;
         Time.timeScale = 1f;
     }
@@ -62,7 +62,7 @@ public class EndCanvas : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Start");
-        endCanvas.SetActive(false);
+        //endCanvas.SetActive(false);
         isCanvasTrue = false;
         Time.timeScale = 1f;
     }

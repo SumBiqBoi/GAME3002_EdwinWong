@@ -34,11 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
         playerTriggerCollision = GetComponentInChildren<PlayerTriggerCollision>();
 
-        if (EndCanvas.instance.isCanvasTrue == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
     } 
 
     void Update()
@@ -54,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             playerTriggerCollision.ResetPlayerToCheckpoint();
         }
 
-        Debug.Log("Velocity: " + rb.velocity.magnitude);
+        //Debug.Log("Velocity: " + rb.velocity.magnitude);
     }
 
     private void FixedUpdate()
