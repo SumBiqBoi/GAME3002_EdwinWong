@@ -11,6 +11,7 @@ static public class GameStateManager
     static public ShopState   shopState;
     static public GameState   gameState;
     static public OptionState optionState;
+    static public EndState endState;
 
     static public void Initialize(BootStrapper bootStrapper)
     {
@@ -21,6 +22,7 @@ static public class GameStateManager
         shopState = new ShopState(bootStrapper.shopScreen);
         gameState = new GameState(bootStrapper.gameScreen);
         optionState = new OptionState(bootStrapper.optionScreen);
+        endState = new EndState(bootStrapper.endScreen);
 
         PushGameStateOnStack(titleState);
     }
