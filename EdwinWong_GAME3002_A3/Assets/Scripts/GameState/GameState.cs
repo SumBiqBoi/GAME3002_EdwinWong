@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameState : AbstractGameState
@@ -14,11 +15,15 @@ public class GameState : AbstractGameState
     public override void LoadGameState()
     {
         gameScreen.SetActive(true);
+
+        Timer.InitTimer();
     }
 
     public override void UnloadGameState()
     {
         gameScreen.SetActive(false);
+        
+        Timer.ResetTimer();
     }
 
     public override void Pause()
@@ -33,6 +38,6 @@ public class GameState : AbstractGameState
 
     public override void Update()
     {
-        
+        Timer.UpdateTimer();
     }
 }

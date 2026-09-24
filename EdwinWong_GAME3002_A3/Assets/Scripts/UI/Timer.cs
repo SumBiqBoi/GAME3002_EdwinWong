@@ -3,17 +3,42 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public static class Timer
 {
-    [SerializeField] TMP_Text timeText;
+    static TMP_Text timeText;
 
-    public float elapsedTime = 0;
-    private int minutes;
-    private int seconds;
+    public static bool isTimerRunning = false;
 
-    void Update()
+    public static float elapsedTime = 0;
+
+    private static int minutes;
+    private static int seconds;
+
+    public static void InitTimer()
     {
-        elapsedTime += Time.deltaTime;
+        GameObject timeObject = GameObject.Find("Timer");
+
+        if (timeObject != null)
+        {
+            timeText = timeObject.GetComponent<TMP_Text>();
+        }
+        else
+        {
+            Debug.Log("Null");
+        }
+    }
+
+    public static void UpdateTimer()
+    {
+        elapsedTime += 0.02f;
+        minutes = Mathf.FloorToInt(elapsedTime / 60);
+        seconds = Mathf.FloorToInt(elapsedTime % 60);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public static void ResetTimer()
+    {
+        elapsedTime = 0;
         minutes = Mathf.FloorToInt(elapsedTime / 60);
         seconds = Mathf.FloorToInt(elapsedTime % 60);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
