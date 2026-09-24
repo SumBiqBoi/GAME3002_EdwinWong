@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CartEnergy : MonoBehaviour
 {
-    public float currentEnergy;
-    public float maxEnergy;
+    float currentEnergy;
+    float maxEnergy;
 
     bool isEnergyDepleting;
 
