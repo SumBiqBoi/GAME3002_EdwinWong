@@ -7,11 +7,6 @@ public class ShapeSave : MonoBehaviour
     [SerializeField] OpenDoor openDoor;
     
     [SerializeField] float setSaveTime;
-    
-    public LinkedList<ShapeData> shapeSavedList = new LinkedList<ShapeData>();
-
-    ShapeTracker shapeTracker;
-
 
     bool isStartTimer;
 
@@ -35,15 +30,8 @@ public class ShapeSave : MonoBehaviour
 
             if (timerToSpawnShape < 0)
             {
-                if (shapeTracker != null)
-                {
-                    foreach (ShapeData shapeData in shapeTracker.shapeList)
-                    {
-                        shapeSavedList.AddLast(shapeData);
-                    }
+                openDoor.OpenDoorAnimation();
 
-                    openDoor.OpenDoorAnimation();
-                }
                 isStartTimer = false;
             }
         }
@@ -54,8 +42,6 @@ public class ShapeSave : MonoBehaviour
         if (other.gameObject.tag == "ShapeTracker")
         {
             isStartTimer = true;
-
-            shapeTracker = other.GetComponentInChildren<ShapeTracker>();
         }
     }
 

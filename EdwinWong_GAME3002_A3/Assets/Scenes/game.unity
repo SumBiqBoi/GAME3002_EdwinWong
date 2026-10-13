@@ -7008,6 +7008,10 @@ PrefabInstance:
       propertyPath: openDoor
       value: 
       objectReference: {fileID: 1216024899}
+    - target: {fileID: 3909438639279043964, guid: 50be1b90fa4f7f64c885cfa1226d8778, type: 3}
+      propertyPath: setSaveTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7901375070138989246, guid: 50be1b90fa4f7f64c885cfa1226d8778, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.780005
@@ -35201,6 +35205,10 @@ PrefabInstance:
       propertyPath: openDoor
       value: 
       objectReference: {fileID: 115908606}
+    - target: {fileID: 3909438639279043964, guid: 50be1b90fa4f7f64c885cfa1226d8778, type: 3}
+      propertyPath: setSaveTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7901375070138989246, guid: 50be1b90fa4f7f64c885cfa1226d8778, type: 3}
       propertyPath: m_LocalPosition.x
       value: -44.72007
@@ -45794,7 +45802,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1355543617}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5079526209604405863, guid: 588b24562ddc4f741a58c21c6c6d367c, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2380788745759766840, guid: 588b24562ddc4f741a58c21c6c6d367c, type: 3}
       insertIndex: -1

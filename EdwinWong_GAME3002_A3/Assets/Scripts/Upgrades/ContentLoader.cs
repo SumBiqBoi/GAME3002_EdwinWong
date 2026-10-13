@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-
 public enum ItemType
 {
     CurrentEnergy,
@@ -13,6 +8,13 @@ public enum ItemType
     MaxSpeed,
     RotateSpeed,
     ContainerStrength
+}
+
+public enum Shapes
+{
+    Cube,
+    Capsule,
+    Sphere
 }
 
 public static class ContentLoader

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class ShapeSpawner : MonoBehaviour
 {
-    LinkedList<ShapeData> shapeSpawnList = new LinkedList<ShapeData>();
-
-    [SerializeField] ShapeSave shapeSave;
-
+    [SerializeField] Shapes shapeType;
     [SerializeField] Transform shapeSpawnPosition;
     [SerializeField] float setSpawnTime;
 
@@ -19,8 +16,6 @@ public class ShapeSpawner : MonoBehaviour
 
     private void Start()
     {
-        shapeSave = transform.parent.GetComponentInChildren<ShapeSave>();
-
         spawnRotation = Quaternion.identity;
 
         isStartTimer = false;
@@ -36,13 +31,31 @@ public class ShapeSpawner : MonoBehaviour
 
             if (timerToSpawnShape < 0 )
             {
-                foreach (ShapeData shapeData in shapeSpawnList)
-                {
-                    GameObject newShape = Instantiate(shapeData.shapePrefab, shapeSpawnPosition.position,spawnRotation);
-                }
+                GameObject newShape = Instantiate(SpawnShape(shapeType), shapeSpawnPosition.position,spawnRotation);
+
                 isStartTimer = false;
             }
         }
+    }
+
+    GameObject SpawnShape(Shapes shape)
+    {
+        GameObject shapeToSpawn = null;
+
+        if (shape == Shapes.Cube)
+        {
+            shapeToSpawn = Resources.Load<GameObject>("Cube- Transport");
+        }
+        else if (shape == Shapes.Capsule)
+        {
+            shapeToSpawn = Resources.Load<GameObject>("Capsule- Transport");
+        }
+        else if (shape == Shapes.Sphere)
+        {
+            shapeToSpawn = Resources.Load<GameObject>("Sphere- Transport");
+        }
+        
+        return shapeToSpawn;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,19 +63,6 @@ public class ShapeSpawner : MonoBehaviour
         if (other.gameObject.tag == "ShapeTracker")
         {
             isStartTimer = true;
-
-            if (shapeSave != null)
-            {
-                if (shapeSave.shapeSavedList.Count > shapeSpawnList.Count)
-                {
-                    shapeSpawnList.Clear();
-
-                    foreach (ShapeData shapeData in shapeSave.shapeSavedList)
-                    {
-                        shapeSpawnList.AddLast(shapeData);
-                    }
-                }
-            }
         }
     }
 
