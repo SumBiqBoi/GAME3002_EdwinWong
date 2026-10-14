@@ -39,7 +39,7 @@ public class ShapeSave : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "ShapeTracker")
+        if (other.gameObject.tag == "Player")
         {
             isStartTimer = true;
         }

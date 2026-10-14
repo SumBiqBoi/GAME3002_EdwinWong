@@ -33,6 +33,7 @@ public class ShapeSpawner : MonoBehaviour
             {
                 GameObject newShape = Instantiate(SpawnShape(shapeType), shapeSpawnPosition.position,spawnRotation);
 
+                timerToSpawnShape = setSpawnTime;
                 isStartTimer = false;
             }
         }
@@ -44,15 +45,15 @@ public class ShapeSpawner : MonoBehaviour
 
         if (shape == Shapes.Cube)
         {
-            shapeToSpawn = Resources.Load<GameObject>("Cube- Transport");
+            shapeToSpawn = Resources.Load<GameObject>("Cube-Transport");
         }
         else if (shape == Shapes.Capsule)
         {
-            shapeToSpawn = Resources.Load<GameObject>("Capsule- Transport");
+            shapeToSpawn = Resources.Load<GameObject>("Capsule-Transport");
         }
         else if (shape == Shapes.Sphere)
         {
-            shapeToSpawn = Resources.Load<GameObject>("Sphere- Transport");
+            shapeToSpawn = Resources.Load<GameObject>("Sphere-Transport");
         }
         
         return shapeToSpawn;
@@ -60,7 +61,7 @@ public class ShapeSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "ShapeTracker")
+        if (other.gameObject.tag == "Player")
         {
             isStartTimer = true;
         }
